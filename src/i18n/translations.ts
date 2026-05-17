@@ -24,8 +24,15 @@ export const translations = {
         { num: "5", label: "Core Services" },
         { num: "90%", label: "Satisfaction Guarantee" },
       ],
-      servicesTitle: "What We Do",
+      servicesTitle: "Services Designed to Grow Your Business",
       servicesSub: "Five disciplines, one team — built to ship.",
+      servicesShort: [
+        { title: "Website Design", tag: "Sites that sell — not just show." },
+        { title: "Branding", tag: "An identity worth being seen." },
+        { title: "Video Production", tag: "Content that's watched & remembered." },
+        { title: "Paid Ads", tag: "Ads that reach buyers, not browsers." },
+        { title: "Content & Social", tag: "A digital presence that doesn't fade." },
+      ],
       whyTitle: "Why Pure Digital",
       whySub: "We sell outcomes, not deliverables.",
       why: [
