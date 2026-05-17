@@ -10,8 +10,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center">
-              <img src={logo} alt="Pure Digital" className="h-32 w-auto" loading="lazy" />
+            <div className="flex items-center overflow-visible">
+              <img src={logo} alt="Pure Digital" className="my-[-32px] h-32 w-auto" loading="lazy" />
             </div>
             <p className="mt-4 text-sm text-muted-foreground">{t.footer.tagline}</p>
           </div>
