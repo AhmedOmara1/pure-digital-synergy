@@ -367,6 +367,6 @@ export const translations = {
     },
     notFound: { title: "الصفحة غير موجودة", sub: "الصفحة التي تبحث عنها غير موجودة.", back: "العودة للرئيسية" },
   },
-} as const;
+};
 
 export type Dict = typeof translations.en;
