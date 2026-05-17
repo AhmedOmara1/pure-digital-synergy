@@ -49,13 +49,7 @@ function Reveal({
 
 function Home() {
   const { t } = useI18n();
-  const serviceLabels = [
-    t.servicesPage.list[0].title,
-    t.servicesPage.list[1].title,
-    t.servicesPage.list[2].title,
-    t.servicesPage.list[3].title,
-    t.servicesPage.list[4].title,
-  ];
+  const serviceShort = t.home.servicesShort;
 
   return (
     <>
