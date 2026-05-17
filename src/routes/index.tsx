@@ -98,16 +98,17 @@ function Home() {
             <p className="mt-3 text-muted-foreground">{t.home.servicesSub}</p>
           </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {serviceLabels.map((label, i) => {
+            {serviceShort.map((s, i) => {
               const Icon = serviceIcons[i];
               return (
-                <Reveal key={label} delay={((i + 1) * 100) as 100 | 200 | 300 | 400 | 500}>
-                  <Link to="/services" className="group block">
-                    <Card className="h-full border-border/60 bg-card p-6 transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:glow-shadow">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-lg gradient-bg transition-transform group-hover:scale-110">
-                        <Icon className="h-5 w-5 text-white" />
+                <Reveal key={s.title} delay={((i + 1) * 100) as 100 | 200 | 300 | 400 | 500}>
+                  <Link to="/services" className="group block h-full">
+                    <Card className="flex h-full flex-col items-center border-border/60 bg-card p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:glow-shadow">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-bg transition-transform group-hover:scale-110">
+                        <Icon className="h-6 w-6 text-white" />
                       </div>
-                      <p className="mt-4 text-sm font-semibold leading-snug">{label}</p>
+                      <p className="mt-4 font-display text-base font-semibold leading-snug">{s.title}</p>
+                      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.tag}</p>
                     </Card>
                   </Link>
                 </Reveal>
