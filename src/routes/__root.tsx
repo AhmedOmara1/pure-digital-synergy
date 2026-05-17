@@ -87,7 +87,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           address: { "@type": "PostalAddress", addressCountry: "AE" },
           sameAs: [
             "https://instagram.com/puredigital.ae",
-            "https://linkedin.com/company/puredigital",
           ],
         }),
       },

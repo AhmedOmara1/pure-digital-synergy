@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { MessageCircle, Mail, Instagram, Linkedin, Clock } from "lucide-react";
+import { MessageCircle, Mail, Instagram, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -54,7 +54,7 @@ function Contact() {
     { icon: MessageCircle, label: t.contact.whatsapp, value: "+971 XX XXX XXXX", href: "https://wa.me/971000000000" },
     { icon: Mail, label: t.contact.email, value: "info@puredigital.ae", href: "mailto:info@puredigital.ae" },
     { icon: Instagram, label: t.contact.instagram, value: "@puredigital.ae", href: "https://instagram.com/puredigital.ae" },
-    { icon: Linkedin, label: t.contact.linkedin, value: "puredigital", href: "https://linkedin.com/company/puredigital" },
+    
     { icon: Clock, label: t.contact.hours, value: t.contact.hoursValue, href: null },
   ];
 
