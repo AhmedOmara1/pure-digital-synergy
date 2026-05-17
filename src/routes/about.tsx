@@ -46,9 +46,8 @@ function About() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/60 bg-card">
             <div className="hero-radial absolute inset-0 opacity-80" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <p className="font-display text-6xl font-bold gradient-text">2026</p>
-                <p className="mt-2 text-muted-foreground">Built in the UAE</p>
+              <div className="px-6 text-center">
+                <p className="font-display text-3xl font-bold leading-tight gradient-text sm:text-4xl md:text-5xl">{t.about.sub}</p>
               </div>
             </div>
           </div>
