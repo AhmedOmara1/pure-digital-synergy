@@ -1,13 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Languages } from "lucide-react";
+import { Menu, X, Languages, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/i18n/LanguageProvider";
-import logo from "@/assets/logo.png";
+import { useTheme } from "@/components/theme-provider";
+import logoDark from "@/assets/logo.png";
+import logoLight from "@/assets/logo-dark.png";
 
 export function Navbar() {
   const { t, lang, toggle } = useI18n();
+  const { theme, toggle: toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
+  const logo = theme === "dark" ? logoDark : logoLight;
 
   const links = [
     { to: "/", label: t.nav.home },
