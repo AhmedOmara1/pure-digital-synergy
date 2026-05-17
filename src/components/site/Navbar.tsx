@@ -17,7 +17,7 @@ export function Navbar() {
     { to: "/", label: t.nav.home },
     { to: "/about", label: t.nav.about },
     { to: "/services", label: t.nav.services },
-    { to: "/pricing", label: t.nav.pricing },
+    
     { to: "/portfolio", label: t.nav.portfolio },
     { to: "/testimonials", label: t.nav.testimonials },
     { to: "/faq", label: t.nav.faq },
