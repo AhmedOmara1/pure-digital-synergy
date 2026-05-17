@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center">
-              <img src={logo} alt="Pure Digital" className="h-16 w-auto" loading="lazy" />
+              <img src={logo} alt="Pure Digital" className="h-16 w-auto rounded-lg bg-white px-3 py-2" loading="lazy" />
             </div>
             <p className="mt-4 text-sm text-muted-foreground">{t.footer.tagline}</p>
           </div>
