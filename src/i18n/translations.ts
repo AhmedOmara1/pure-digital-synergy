@@ -46,10 +46,11 @@ export const translations = {
       title: "About Pure Digital",
       sub: "Where vision meets execution.",
       storyTitle: "Our Story",
-      story1:
-        "Pure Digital is a UAE-based digital agency built on a simple belief: a brand without a digital presence is invisible — and a digital presence without sales is decoration.",
-      story2:
-        "We combine design, technology, and marketing into one team so our clients get one accountable partner — from the first sketch to the first sale.",
+      storyPoints: [
+        "Pure Digital was born from a simple belief: every business — no matter how small — deserves a digital presence that truly represents it.",
+        "We are a team of designers, developers, and marketing experts united by one passion: turning ideas into unforgettable digital experiences.",
+        "We don't just build websites — we build bridges between your business and your customers.",
+      ],
       valuesTitle: "Our Values",
       values: [
         { title: "Quality", text: "Quality is our red line — we refuse mediocrity." },
