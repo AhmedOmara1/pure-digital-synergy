@@ -15,6 +15,7 @@ import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
+import { ThemeProvider } from "@/components/theme-provider";
 
 function NotFoundComponent() {
   const { t } = useI18n();
