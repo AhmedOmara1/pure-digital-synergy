@@ -174,6 +174,52 @@ export const translations = {
       ctaBanner: "Your digital presence starts with one decision.",
       ctaBannerSub: "Free consultation. No commitment.",
     },
+    pricing: {
+      title: "Pricing",
+      sub: "Transparent packages with no hidden fees. All prices in AED.",
+      note: "* Prices are starting estimates. Final quote depends on scope. 50/50 payment plan available.",
+      popular: "Most Popular",
+      ctaLabel: "Get Started",
+      packages: [
+        {
+          name: "Starter",
+          price: "1,500",
+          tagline: "For new businesses launching online.",
+          features: [
+            "5-page responsive website",
+            "Basic SEO setup",
+            "Logo + simple brand kit",
+            "1 social media template set",
+            "14-day delivery",
+          ],
+        },
+        {
+          name: "Growth",
+          price: "4,500",
+          tagline: "For businesses ready to scale.",
+          features: [
+            "10-page website or basic e-commerce",
+            "Full brand identity (logo + guidelines)",
+            "Monthly social content (20 posts)",
+            "Meta + Google Ads setup",
+            "Weekly performance reports",
+          ],
+          highlight: true,
+        },
+        {
+          name: "Premium",
+          price: "9,000",
+          tagline: "Full-service digital partner.",
+          features: [
+            "Custom website or full e-commerce",
+            "Full branding + video production",
+            "Daily social management (30 posts)",
+            "Managed paid ads (Meta + Google + TikTok)",
+            "Dedicated account manager",
+          ],
+        },
+      ],
+    },
     footer: {
       tagline: "Where vision meets execution.",
       quickLinks: "Quick Links",
