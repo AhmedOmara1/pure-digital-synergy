@@ -24,8 +24,15 @@ export const translations = {
         { num: "5", label: "Core Services" },
         { num: "90%", label: "Satisfaction Guarantee" },
       ],
-      servicesTitle: "What We Do",
+      servicesTitle: "Services Designed to Grow Your Business",
       servicesSub: "Five disciplines, one team — built to ship.",
+      servicesShort: [
+        { title: "Website Design", tag: "Sites that sell — not just show." },
+        { title: "Branding", tag: "An identity worth being seen." },
+        { title: "Video Production", tag: "Content that's watched & remembered." },
+        { title: "Paid Ads", tag: "Ads that reach buyers, not browsers." },
+        { title: "Content & Social", tag: "A digital presence that doesn't fade." },
+      ],
       whyTitle: "Why Pure Digital",
       whySub: "We sell outcomes, not deliverables.",
       why: [
@@ -208,8 +215,15 @@ export const translations = {
         { num: "5", label: "خدمات رئيسية" },
         { num: "90%", label: "ضمان الرضا" },
       ],
-      servicesTitle: "ماذا نقدم",
+      servicesTitle: "خدمات صُممت لتنمية عملك",
       servicesSub: "خمس خدمات، فريق واحد، تنفيذ احترافي.",
+      servicesShort: [
+        { title: "تصميم المواقع", tag: "موقع يبيع لا تُعرض فقط." },
+        { title: "الهوية البصرية", tag: "هوية تُعرف بها قبل أن تتكلم." },
+        { title: "إنتاج الفيديو", tag: "محتوى يُشاهد ويُحفظ." },
+        { title: "الإعلانات الممولة", tag: "إعلانات تصل لمن يريد الشراء." },
+        { title: "إدارة المحتوى", tag: "حضور رقمي لا ينطفئ." },
+      ],
       whyTitle: "لماذا بيور ديجيتال",
       whySub: "نبيع نتائج، لا مجرد خدمات.",
       why: [
