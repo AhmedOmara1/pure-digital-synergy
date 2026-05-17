@@ -51,9 +51,9 @@ function Contact() {
   };
 
   const info = [
-    { icon: MessageCircle, label: t.contact.whatsapp, value: "+971 XX XXX XXXX", href: "https://wa.me/971000000000" },
-    { icon: Mail, label: t.contact.email, value: "info@puredigital.ae", href: "mailto:info@puredigital.ae" },
-    { icon: Instagram, label: t.contact.instagram, value: "@puredigital.ae", href: "https://instagram.com/puredigital.ae" },
+    { icon: MessageCircle, label: t.contact.whatsapp, value: "—", href: null },
+    { icon: Mail, label: t.contact.email, value: "—", href: null },
+    { icon: Instagram, label: t.contact.instagram, value: "—", href: null },
     { icon: Linkedin, label: t.contact.linkedin, value: "—", href: null },
     { icon: Clock, label: t.contact.hours, value: t.contact.hoursValue, href: null },
   ];

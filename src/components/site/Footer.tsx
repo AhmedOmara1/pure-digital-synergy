@@ -44,17 +44,17 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold">{t.footer.follow}</h4>
             <div className="mt-4 flex gap-3">
-              <a href="https://instagram.com/puredigital.ae" aria-label="Instagram" className="rounded-full border border-border p-2 text-muted-foreground hover:text-foreground">
+              <span aria-label="Instagram" className="rounded-full border border-border p-2 text-muted-foreground">
                 <Instagram className="h-4 w-4" />
-              </a>
+              </span>
               <span aria-label="LinkedIn" className="rounded-full border border-border p-2 text-muted-foreground">
                 <Linkedin className="h-4 w-4" />
               </span>
-              <a href="https://wa.me/971000000000" aria-label="WhatsApp" className="rounded-full border border-border p-2 text-muted-foreground hover:text-foreground">
+              <span aria-label="WhatsApp" className="rounded-full border border-border p-2 text-muted-foreground">
                 <MessageCircle className="h-4 w-4" />
-              </a>
+              </span>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">info@puredigital.ae</p>
+            
           </div>
         </div>
 
