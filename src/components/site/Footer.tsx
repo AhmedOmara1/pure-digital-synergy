@@ -54,7 +54,7 @@ export function Footer() {
                 <MessageCircle className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">info@puredigital.ae</p>
+            
           </div>
         </div>
 
