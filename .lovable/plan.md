@@ -1,70 +1,72 @@
-# Pure Digital — Bilingual Marketing Website
+# مراجعة الموقع مقابل ملف المحتوى
 
-A 7-page bilingual (Arabic RTL / English LTR) marketing site with a language toggle, dark navy + electric blue palette, and the supplied logo.
+قارنت محتوى الـ DOCX بالموقع الحالي. الهيكل العام موجود (Home / About / Services / Portfolio / Testimonials / FAQ / Contact / Footer / WhatsApp Float / Sitemap / robots / Logo). لكن في حاجات ناقصة أو محتاجة تظبيط.
 
-## Design System
+## ✅ موجود وشغّال
+- Hero بالـ headline والـ sub والـ CTAs والـ stats (55+ / 32+ / 5 / 90%)
+- Services Overview بالخدمات الـ 5
+- Why Us بالـ 4 نقاط
+- About: story + values + team (3 أعضاء)
+- Services page بالـ 5 خدمات + "Includes"
+- Portfolio بفلاتر التصنيف
+- Testimonials بـ 3 آراء
+- FAQ بـ 6 أسئلة
+- Contact form بكل الحقول المطلوبة + معلومات التواصل
+- Footer + Quick Links + Social
+- WhatsApp Float + Sitemap + robots.txt + Bilingual AR/EN + RTL
 
-- **Palette (oklch in `src/styles.css`)**: dark navy background `#0a1628`, electric blue primary `#2563eb` → glow `#3b82f6`, white/near-white foreground, muted slate for secondary text. Gradient accent matching the logo (blue → purple).
-- **Typography**: Inter (EN body/headings) + Poppins (EN display), Cairo (AR body) + Tajawal (AR headings) — loaded via Google Fonts in `__root.tsx`. Font family swaps based on active language.
-- **Components**: shadcn Button, Card, Accordion, Dialog, Tabs, Carousel, Form, Input, Select, Textarea, Sonner (toasts).
-- **Logo**: copied to `src/assets/logo.jpg`, used in navbar + footer + favicon.
+## ❌ ناقص أو محتاج تعديل
 
-## i18n Approach
+### 1. صفحة الأسعار / Pricing (ناقصة بالكامل)
+الـ DOCX بيذكر "الأسعار / Pricing" كصفحة من النافبار، لكن مفيش `pricing.tsx`. لازم نضيف:
+- لينك في الـ Navbar والـ Footer
+- صفحة `/pricing` فيها باقات (Starter / Growth / Premium مثلاً) لكل خدمة أو باقات شاملة
+- المحتوى الفعلي للأسعار مش موجود في الـ DOCX، فهنحط placeholder بأرقام مقترحة بالـ AED + ملاحظة إنها تتعدل
 
-Lightweight context-based i18n (no external lib needed):
-- `src/i18n/translations.ts` — single source of truth: `{ en: {...}, ar: {...} }` keyed by section.
-- `src/i18n/LanguageProvider.tsx` — context with `lang`, `setLang`, `t(key)`, `dir`. Persists choice in `localStorage`, sets `<html lang>` and `<html dir>` via effect.
-- Navbar toggle button: "AR / EN".
-- Tailwind RTL handled via logical properties (`ms-*`, `me-*`, `ps-*`, `pe-*`, `text-start`, `text-end`) plus `dir="rtl"` on `<html>`.
+### 2. Contact — أرقام/حسابات حقيقية
+الـ DOCX حاطط placeholders (+971 XX XXX XXXX / @puredigital.ae). محتاج منك الأرقام الفعلية. الحالي عندنا قيم وهمية في الفورم — هنخليها placeholders واضحة لحد ما توفّر الحقيقية.
 
-## Route Structure (TanStack Start file routes)
+### 3. CTA Banner في صفحة Contact
+"حضورك الرقمي يبدأ من قرار واحد — استشارة مجانية بدون التزام" — موجود في الترجمات بس محتاج نتأكد إنه ظاهر فعلاً في صفحة Contact كبانر مميز.
 
-```
-src/routes/
-  __root.tsx              -> shell + LanguageProvider + Navbar + Footer + WhatsApp float + GA4/Pixel placeholders
-  index.tsx               -> Home (hero, stats, services strip, why-us)
-  about.tsx               -> About (story, values, team)
-  services.tsx            -> 5 detailed service sections
-  portfolio.tsx           -> Filterable grid + project modal + lightbox
-  testimonials.tsx        -> Carousel + trusted-by strip
-  faq.tsx                 -> Accordion FAQ
-  contact.tsx             -> Contact info + validated form + final CTA banner
-  sitemap[.]xml.ts        -> Dynamic sitemap server route
-```
+### 4. SEO / Meta tags
+الـ DOCX بيحدد title + meta description + keywords + OG image لكل صفحة بالعربي والإنجليزي. محتاج نتأكد إن كل route فيه `head()` بالـ titles والـ descriptions المطابقة للـ DOCX (بالـ AR لما اللغة عربي).
 
-Each route gets its own `head()` with bilingual-aware title, description, og:title, og:description, og:image (1200×630), and canonical. Root sets `LocalBusiness` JSON-LD. `public/robots.txt` allows all, disallows `/admin`. Custom 404 already exists in `__root.tsx` — restyled with "Back to Home".
+### 5. Schema Markup
+LocalBusiness أو Organization JSON-LD في `__root.tsx` — لسه مش متضاف.
 
-## Page-by-Page
+### 6. Google Analytics 4 + Meta Pixel
+مطلوبين في الـ brief، لسه مش مركّبين. محتاج الـ GA4 Measurement ID والـ Meta Pixel ID.
 
-1. **Home** — Hero with bilingual headline, two CTAs (primary → /contact, secondary → /portfolio), stats bar (55+/32+/5/90%), services icon strip (5 cards linking to /services), why-us 4-card grid.
-2. **About** — Two-column story (AR+EN intent: shows the active language), 4 values cards, 3 team cards with placeholder avatars.
-3. **Services** — 5 stacked sections, alternating layout, each with title, description, "Includes" check-list.
-4. **Portfolio** — Tabs filter (All/Websites/Branding/Video/Ads/Content), responsive grid (3/2/1), Dialog modal with project details + "Start a Similar Project" CTA to /contact, image lightbox via Dialog. Seed with sample projects incl. Bloom Restaurant.
-5. **Testimonials** — shadcn Carousel with 3 testimonials (stars, avatar, name, title), trusted-by logo strip (placeholder marks).
-6. **FAQ** — shadcn Accordion with 6 Q&A items.
-7. **Contact** — Info block (WhatsApp, email, Instagram, LinkedIn, hours), validated form (react-hook-form + zod), final CTA banner.
+### 7. تظبيط بسيط في المحتوى
+- Why Us: الـ DOCX بيقول "اللوغو في 48 ساعة، الموقع في 7 أيام" — متطابق ✅
+- Stats: الترتيب والأرقام مطابقة ✅
+- Footer tagline: "Where Vision Meets Execution" ✅
+- Pricing payment terms (50/50) — موجودة في FAQ بس ممكن تتكرر في صفحة Pricing
 
-## Shared Components
+## خطة التنفيذ (لما توافق)
 
-- `Navbar` — sticky, logo left, nav links, AR/EN toggle, "Start Now" CTA. Mobile: Sheet drawer.
-- `Footer` — logo + tagline, quick links, services list, social icons, copyright, privacy/terms links.
-- `WhatsAppFloat` — fixed bottom-end button on every page (uses `end-6` for RTL safety).
-- `SectionHeading`, `Container` helpers.
+1. **Pricing page**
+   - إنشاء `src/routes/pricing.tsx` بثلاث باقات (Starter / Growth / Premium) بأرقام placeholder
+   - إضافة `pricing` للترجمات (AR + EN)
+   - إضافة اللينك في `Navbar.tsx` و `Footer.tsx`
+   - تحديث `sitemap.xml`
 
-## Technical
+2. **SEO تحسينات**
+   - تحديث `head()` في كل route بالـ title/description المطابقة للـ DOCX
+   - إضافة JSON-LD Organization schema في `__root.tsx`
+   - إضافة OG image meta tags (هستخدم اللوجو لحد ما توفّر صورة 1200×630)
 
-- **Performance**: lazy-load images via native `loading="lazy"`; hero image preloaded via route `head().links`.
-- **SEO**: per-route head metadata, JSON-LD `LocalBusiness` at root, dynamic `sitemap.xml` listing all 7 routes, `robots.txt`.
-- **Analytics**: GA4 + Meta Pixel script tags in `__root.tsx` with `GA_ID` / `PIXEL_ID` placeholders the user can swap. `<noscript>` Pixel fallback in `<body>`, not `<head>`.
-- **Form**: client-side validation only (no backend). Submit shows success toast. (Wiring to email/CRM requires Lovable Cloud — can add later if requested.)
-- **Responsive**: Tailwind breakpoints; mobile-first.
-- **404**: existing `notFoundComponent` restyled with bilingual copy + Home button.
+3. **Analytics (لو وفّرت الـ IDs)**
+   - GA4 gtag script
+   - Meta Pixel snippet
+   - الاتنين في `__root.tsx`
 
-## What I'll skip unless asked
+4. **Contact CTA Banner**
+   - بانر مميز في آخر صفحة Contact بالنص المطلوب
 
-- Pricing page (not in spec, but referenced in footer — I'll point the footer link to `/services` and note this).
-- Backend for contact form (would need Lovable Cloud).
-- Real GA4 / Pixel IDs (placeholders).
-- OG images — will omit `og:image` until you provide one or want generation, per project guidelines.
+## محتاج منك قبل التنفيذ
 
-Ready to build on approval.
+1. هل تحب أضيف صفحة Pricing بباقات placeholder، ولا تفضّل تبعتلي الأسعار الفعلية الأول؟
+2. عندك GA4 ID و Meta Pixel ID دلوقتي؟ (لو لا، هسيبهم لحد ما توفرهم)
+3. الأرقام الحقيقية: WhatsApp / Email / Instagram / LinkedIn — تبعتهم؟
