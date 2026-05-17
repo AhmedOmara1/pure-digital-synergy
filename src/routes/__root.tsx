@@ -13,7 +13,6 @@ import { LanguageProvider, useI18n } from "@/i18n/LanguageProvider";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
-import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -125,7 +124,6 @@ function RootComponent() {
       <ThemeProvider>
         <LanguageProvider>
           <div className="flex min-h-screen flex-col">
-            <ScrollProgress />
             <Navbar />
             <main className="flex-1">
               <Outlet />
