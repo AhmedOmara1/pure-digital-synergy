@@ -46,10 +46,11 @@ export const translations = {
       title: "About Pure Digital",
       sub: "Where vision meets execution.",
       storyTitle: "Our Story",
-      story1:
-        "Pure Digital is a UAE-based digital agency built on a simple belief: a brand without a digital presence is invisible — and a digital presence without sales is decoration.",
-      story2:
-        "We combine design, technology, and marketing into one team so our clients get one accountable partner — from the first sketch to the first sale.",
+      storyPoints: [
+        "Pure Digital was born from a simple belief: every business — no matter how small — deserves a digital presence that truly represents it.",
+        "We are a team of designers, developers, and marketing experts united by one passion: turning ideas into unforgettable digital experiences.",
+        "We don't just build websites — we build bridges between your business and your customers.",
+      ],
       valuesTitle: "Our Values",
       values: [
         { title: "Quality", text: "Quality is our red line — we refuse mediocrity." },
@@ -237,10 +238,11 @@ export const translations = {
       title: "من نحن",
       sub: "حيث تلتقي الرؤية بالتنفيذ.",
       storyTitle: "قصتنا",
-      story1:
-        "بيور ديجيتال وكالة رقمية مقرها الإمارات، نؤمن بأن العلامة التجارية بلا حضور رقمي غير مرئية، والحضور الرقمي بلا مبيعات مجرد ديكور.",
-      story2:
-        "نجمع بين التصميم والتقنية والتسويق في فريق واحد، حتى يحصل عملاؤنا على شريك مسؤول واحد — من أول فكرة إلى أول عملية بيع.",
+      storyPoints: [
+        "وُلدت Pure Digital من إيمان بسيط: كل عمل — مهما كان صغيراً — يستحق حضوراً رقمياً يليق به.",
+        "نحن فريق من المصممين والمبرمجين وخبراء التسويق، تجمعنا شغف واحد: تحويل الأفكار إلى تجارب رقمية لا تُنسى.",
+        "لا نصنع مواقع فقط — نبني جسوراً بين عملك وعملائك.",
+      ],
       valuesTitle: "قيمنا",
       values: [
         { title: "الجودة", text: "نرفض العمل المتوسط — الجودة خط أحمر." },
