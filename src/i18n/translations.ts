@@ -52,16 +52,16 @@ export const translations = {
         "We combine design, technology, and marketing into one team so our clients get one accountable partner — from the first sketch to the first sale.",
       valuesTitle: "Our Values",
       values: [
-        { title: "Quality", text: "Every pixel and every line of code is reviewed twice." },
-        { title: "Speed", text: "We respect your time. Deadlines are commitments." },
-        { title: "Transparency", text: "Clear scopes, clear prices, weekly reports." },
-        { title: "Results", text: "We optimize for revenue, not vanity metrics." },
+        { title: "Quality", text: "Quality is our red line — we refuse mediocrity." },
+        { title: "Speed", text: "Your time is precious — we respect it." },
+        { title: "Transparency", text: "No hidden fees, no hidden results." },
+        { title: "Results", text: "We're measured by your growth, not our promises." },
       ],
       teamTitle: "Meet the Team",
       team: [
-        { name: "Layla Hassan", role: "Creative Director", bio: "10+ years building brands across the GCC." },
-        { name: "Omar Saeed", role: "Marketing Manager", bio: "Paid-media strategist with a focus on ROI." },
-        { name: "Karim Nader", role: "Web Developer", bio: "Full-stack engineer obsessed with performance." },
+        { name: "Layla Hassan", role: "Creative Director", bio: "Leads the visual vision and ensures every design tells a story." },
+        { name: "Omar Saeed", role: "Marketing Manager", bio: "Builds digital growth strategies and turns data into decisions." },
+        { name: "Karim Nader", role: "Web Developer", bio: "Transforms designs into fast, secure, interactive experiences." },
       ],
     },
     servicesPage: {
