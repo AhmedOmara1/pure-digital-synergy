@@ -34,8 +34,14 @@ function About() {
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary-glow">{t.about.storyTitle}</p>
             <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">{t.about.storyTitle}</h2>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">{t.about.story1}</p>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">{t.about.story2}</p>
+            <ul className="mt-6 space-y-4">
+              {t.about.storyPoints.map((p, i) => (
+                <li key={i} className="flex gap-3 text-base leading-relaxed text-muted-foreground">
+                  <span className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full gradient-bg" />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/60 bg-card">
             <div className="hero-radial absolute inset-0 opacity-80" />
