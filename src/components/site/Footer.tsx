@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { useI18n } from "@/i18n/LanguageProvider";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   const { t } = useI18n();
@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2">
-              <img src={logo} alt="Pure Digital" className="h-10 w-auto rounded-md bg-white p-1" loading="lazy" />
+              <img src={logo} alt="Pure Digital" className="h-10 w-auto rounded-md " loading="lazy" />
               <span className="font-display text-lg font-bold">Pure Digital</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">{t.footer.tagline}</p>
