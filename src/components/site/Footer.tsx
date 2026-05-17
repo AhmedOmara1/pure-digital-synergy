@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, MessageCircle } from "lucide-react";
+import { Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { useI18n } from "@/i18n/LanguageProvider";
 import { useTheme } from "@/components/theme-provider";
 import logoDark from "@/assets/logo.png";
@@ -47,6 +47,9 @@ export function Footer() {
               <a href="https://instagram.com/puredigital.ae" aria-label="Instagram" className="rounded-full border border-border p-2 text-muted-foreground hover:text-foreground">
                 <Instagram className="h-4 w-4" />
               </a>
+              <span aria-label="LinkedIn" className="rounded-full border border-border p-2 text-muted-foreground">
+                <Linkedin className="h-4 w-4" />
+              </span>
               <a href="https://wa.me/971000000000" aria-label="WhatsApp" className="rounded-full border border-border p-2 text-muted-foreground hover:text-foreground">
                 <MessageCircle className="h-4 w-4" />
               </a>
