@@ -6,7 +6,7 @@ export const translations = {
       home: "Home",
       about: "About",
       services: "Services",
-      pricing: "Pricing",
+      
       portfolio: "Portfolio",
       testimonials: "Testimonials",
       faq: "FAQ",
@@ -174,52 +174,6 @@ export const translations = {
       ctaBanner: "Your digital presence starts with one decision.",
       ctaBannerSub: "Free consultation. No commitment.",
     },
-    pricing: {
-      title: "Pricing",
-      sub: "Transparent packages with no hidden fees. All prices in AED.",
-      note: "* Prices are starting estimates. Final quote depends on scope. 50/50 payment plan available.",
-      popular: "Most Popular",
-      ctaLabel: "Get Started",
-      packages: [
-        {
-          name: "Starter",
-          price: "1,500",
-          tagline: "For new businesses launching online.",
-          features: [
-            "5-page responsive website",
-            "Basic SEO setup",
-            "Logo + simple brand kit",
-            "1 social media template set",
-            "14-day delivery",
-          ],
-        },
-        {
-          name: "Growth",
-          price: "4,500",
-          tagline: "For businesses ready to scale.",
-          features: [
-            "10-page website or basic e-commerce",
-            "Full brand identity (logo + guidelines)",
-            "Monthly social content (20 posts)",
-            "Meta + Google Ads setup",
-            "Weekly performance reports",
-          ],
-          highlight: true,
-        },
-        {
-          name: "Premium",
-          price: "9,000",
-          tagline: "Full-service digital partner.",
-          features: [
-            "Custom website or full e-commerce",
-            "Full branding + video production",
-            "Daily social management (30 posts)",
-            "Managed paid ads (Meta + Google + TikTok)",
-            "Dedicated account manager",
-          ],
-        },
-      ],
-    },
     footer: {
       tagline: "Where vision meets execution.",
       quickLinks: "Quick Links",
@@ -236,7 +190,7 @@ export const translations = {
       home: "الرئيسية",
       about: "من نحن",
       services: "خدماتنا",
-      pricing: "الأسعار",
+      
       portfolio: "أعمالنا",
       testimonials: "آراء العملاء",
       faq: "الأسئلة",
@@ -403,52 +357,6 @@ export const translations = {
       },
       ctaBanner: "حضورك الرقمي يبدأ بقرار واحد.",
       ctaBannerSub: "استشارة مجانية. بدون التزام.",
-    },
-    pricing: {
-      title: "الأسعار",
-      sub: "باقات شفافة بدون رسوم خفية. كل الأسعار بالدرهم الإماراتي.",
-      note: "* الأسعار تقديرية ومبدئية. السعر النهائي حسب نطاق المشروع. متاح تقسيم 50/50.",
-      popular: "الأكثر طلبًا",
-      ctaLabel: "ابدأ الآن",
-      packages: [
-        {
-          name: "البداية",
-          price: "1,500",
-          tagline: "للأعمال الجديدة التي تبدأ حضورها الرقمي.",
-          features: [
-            "موقع متجاوب من 5 صفحات",
-            "إعداد SEO أساسي",
-            "لوغو + هوية مبسطة",
-            "حزمة قوالب سوشيال ميديا",
-            "تسليم خلال 14 يومًا",
-          ],
-        },
-        {
-          name: "النمو",
-          price: "4,500",
-          tagline: "للأعمال الجاهزة للتوسع.",
-          features: [
-            "موقع 10 صفحات أو متجر أساسي",
-            "هوية بصرية كاملة (لوغو + دليل)",
-            "محتوى سوشيال شهري (20 منشور)",
-            "إعداد إعلانات ميتا وجوجل",
-            "تقارير أداء أسبوعية",
-          ],
-          highlight: true,
-        },
-        {
-          name: "بريميوم",
-          price: "9,000",
-          tagline: "شريك رقمي متكامل.",
-          features: [
-            "موقع مخصص أو متجر كامل",
-            "هوية كاملة + إنتاج فيديو",
-            "إدارة سوشيال يومية (30 منشور)",
-            "إدارة إعلانات (ميتا + جوجل + تيك توك)",
-            "مدير حساب مخصص",
-          ],
-        },
-      ],
     },
     footer: {
       tagline: "حيث تلتقي الرؤية بالتنفيذ.",
