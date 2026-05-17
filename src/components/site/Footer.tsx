@@ -1,10 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { useI18n } from "@/i18n/LanguageProvider";
-import logo from "@/assets/logo.png";
+import { useTheme } from "@/components/theme-provider";
+import logoDark from "@/assets/logo.png";
+import logoLight from "@/assets/logo-dark.png";
 
 export function Footer() {
   const { t } = useI18n();
+  const { theme } = useTheme();
+  const logo = theme === "dark" ? logoDark : logoLight;
   return (
     <footer className="border-t border-border/50 bg-navy-deep">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

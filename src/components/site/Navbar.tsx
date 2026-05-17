@@ -1,13 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Languages } from "lucide-react";
+import { Menu, X, Languages, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/i18n/LanguageProvider";
-import logo from "@/assets/logo.png";
+import { useTheme } from "@/components/theme-provider";
+import logoDark from "@/assets/logo.png";
+import logoLight from "@/assets/logo-dark.png";
 
 export function Navbar() {
   const { t, lang, toggle } = useI18n();
+  const { theme, toggle: toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
+  const logo = theme === "dark" ? logoDark : logoLight;
 
   const links = [
     { to: "/", label: t.nav.home },
@@ -42,6 +46,9 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
           <Button variant="ghost" size="sm" onClick={toggle} className="gap-1.5">
             <Languages className="h-4 w-4" />
             {lang === "en" ? "AR" : "EN"}
