@@ -46,6 +46,9 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
           <Button variant="ghost" size="sm" onClick={toggle} className="gap-1.5">
             <Languages className="h-4 w-4" />
             {lang === "en" ? "AR" : "EN"}
