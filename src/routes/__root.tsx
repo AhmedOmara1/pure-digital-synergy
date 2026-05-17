@@ -59,6 +59,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Pure Digital" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Pure Digital — UAE Digital Agency" },
+      { name: "twitter:title", content: "Pure Digital — UAE Digital Agency" },
+      { property: "og:description", content: "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency." },
+      { name: "twitter:description", content: "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ec37af88-e088-4f93-b620-3c0ec4cf24fe" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ec37af88-e088-4f93-b620-3c0ec4cf24fe" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
