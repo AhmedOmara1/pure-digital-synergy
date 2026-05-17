@@ -21,9 +21,9 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-32 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="Pure Digital" className="h-28 w-auto sm:h-32" />
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="flex items-center overflow-visible">
+          <img src={logo} alt="Pure Digital" className="my-[-30px] h-28 w-auto sm:my-[-40px] sm:h-32" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
