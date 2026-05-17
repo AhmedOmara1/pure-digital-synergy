@@ -37,6 +37,7 @@ function Services() {
                 <div>
                   <p className="font-display text-5xl font-bold gradient-text">0{i + 1}</p>
                   <h2 className="mt-4 font-display text-2xl font-bold sm:text-3xl">{s.title}</h2>
+                  <p className="mt-2 font-display text-base font-medium text-primary-glow sm:text-lg">{s.tagline}</p>
                   <p className="mt-4 text-muted-foreground">{s.desc}</p>
                   <Link to="/contact" className="mt-6 inline-block">
                     <Button className="gradient-bg border-0">{t.nav.cta}</Button>
