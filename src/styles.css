@@ -269,4 +269,5 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-scale { opacity: 1 !important; transform: none !important; transition: none !important; }
   .animate-fade-in-up, .animate-scale-in, .animate-glow-pulse { animation: none !important; }
+  .aurora-blob { animation: none !important; }
 }
