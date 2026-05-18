@@ -155,9 +155,9 @@ export const translations = {
       sub: "Real words from real clients.",
       trusted: "Trusted By",
       items: [
-        { name: "Ahmed Al-Kindi", title: "Founder, Bloom Restaurant", text: "Pure Digital rebuilt our identity and our reservations jumped 40% in the first month. Worth every dirham." },
-        { name: "Sara Al-Mansouri", title: "CEO, Mansouri Boutique", text: "The new e-commerce store paid for itself in 6 weeks. Their team is responsive and genuinely care about results." },
-        { name: "Mohammed Al-Shamsi", title: "Marketing Director, Shamsi Group", text: "Best agency we've worked with in the UAE. Clear reports, fast turnaround, and the ad performance speaks for itself." },
+        { name: "Ahmed Al-Kindi", title: "Dubai Restaurant Owner", text: "Working with Pure Digital transformed our digital presence. The new website increased our sales by 35% in the first month." },
+        { name: "Sara Al-Mansouri", title: "Fashion Store Founder", text: "The visual identity they designed exceeded all our expectations. Everyone who sees the logo asks about it immediately." },
+        { name: "Mohammed Al-Shamsi", title: "Clinic Manager", text: "The paid campaigns the team managed brought us new clients every week at a very reasonable cost." },
       ],
     },
     faq: {
