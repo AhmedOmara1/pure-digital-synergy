@@ -73,12 +73,11 @@ function About() {
           <SectionHeading title={t.about.teamTitle} />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {t.about.team.map((m) => (
-              <Card key={m.name} className="border-border/60 bg-card p-6 text-center">
+              <Card key={m.role} className="border-border/60 bg-card p-6 text-center">
                 <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full gradient-bg">
                   <User className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold">{m.name}</h3>
-                <p className="text-sm text-primary-glow">{m.role}</p>
+                <p className="mt-5 font-display text-lg font-semibold text-primary-glow">{m.role}</p>
                 <p className="mt-3 text-sm text-muted-foreground">{m.bio}</p>
               </Card>
             ))}
