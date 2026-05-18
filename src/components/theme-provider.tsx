@@ -11,7 +11,7 @@ interface Ctx {
 const ThemeContext = createContext<Ctx | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
 
   useEffect(() => {
     const saved = typeof window !== "undefined" ? (localStorage.getItem("theme") as Theme | null) : null;
