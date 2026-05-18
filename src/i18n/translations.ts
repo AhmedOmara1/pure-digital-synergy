@@ -155,9 +155,9 @@ export const translations = {
       sub: "Real words from real clients.",
       trusted: "Trusted By",
       items: [
-        { name: "Ahmed Al-Kindi", title: "Founder, Bloom Restaurant", text: "Pure Digital rebuilt our identity and our reservations jumped 40% in the first month. Worth every dirham." },
-        { name: "Sara Al-Mansouri", title: "CEO, Mansouri Boutique", text: "The new e-commerce store paid for itself in 6 weeks. Their team is responsive and genuinely care about results." },
-        { name: "Mohammed Al-Shamsi", title: "Marketing Director, Shamsi Group", text: "Best agency we've worked with in the UAE. Clear reports, fast turnaround, and the ad performance speaks for itself." },
+        { name: "Ahmed Al-Kindi", title: "Dubai Restaurant Owner", text: "Working with Pure Digital transformed our digital presence. The new website increased our sales by 35% in the first month." },
+        { name: "Sara Al-Mansouri", title: "Fashion Store Founder", text: "The visual identity they designed exceeded all our expectations. Everyone who sees the logo asks about it immediately." },
+        { name: "Mohammed Al-Shamsi", title: "Clinic Manager", text: "The paid campaigns the team managed brought us new clients every week at a very reasonable cost." },
       ],
     },
     faq: {
@@ -363,9 +363,9 @@ export const translations = {
       sub: "كلمات حقيقية من عملاء حقيقيين.",
       trusted: "بثقة عملائنا",
       items: [
-        { name: "أحمد الكندي", title: "مؤسس، مطعم بلوم", text: "بيور ديجيتال أعادوا بناء هويتنا وزادت الحجوزات 40% في أول شهر. تستحق كل درهم." },
-        { name: "سارة المنصوري", title: "الرئيسة التنفيذية، بوتيك المنصوري", text: "المتجر الإلكتروني الجديد غطى تكلفته خلال 6 أسابيع. فريق سريع الاستجابة ويهتم فعلاً بالنتائج." },
-        { name: "محمد الشامسي", title: "مدير التسويق، مجموعة الشامسي", text: "أفضل وكالة تعاملنا معها في الإمارات. تقارير واضحة وتنفيذ سريع ونتائج إعلانية ممتازة." },
+        { name: "أحمد الكندي", title: "مدير مطعم في دبي", text: "غيّر وجهة عملنا رقمياً. الموقع الجديد رفع مبيعاتنا 35% في أول شهر العمل مع Pure Digital." },
+        { name: "سارة المنصوري", title: "مؤسسة متجر أزياء", text: "الهوية البصرية التي صمموها لنا تفوق كل توقعاتنا. كل من يرى الشعار يسأل عنه فوراً." },
+        { name: "محمد الشامسي", title: "مدير عيادة", text: "الإعلانات الممولة التي أدارها الفريق أعطتنا عملاء جدداً كل أسبوع بتكلفة معقولة جداً." },
       ],
     },
     faq: {
