@@ -54,8 +54,11 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="hero-radial relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
+      <section className="hero-aurora relative overflow-hidden">
+        <div aria-hidden className="aurora-blob aurora-blob-1" />
+        <div aria-hidden className="aurora-blob aurora-blob-2" />
+        <div aria-hidden className="aurora-blob aurora-blob-3" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="mt-6 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up">
               <span className="gradient-text">{t.home.heroTitle}</span>
