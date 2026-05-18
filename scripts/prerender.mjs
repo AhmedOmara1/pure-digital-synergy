@@ -1,10 +1,14 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { access, mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const clientDir = join(rootDir, "dist", "client");
-const serverEntry = join(rootDir, "dist", "server", "server.js");
+const serverEntryCandidates = [
+  join(rootDir, "dist", "server", "server.js"),
+  join(rootDir, "dist", "server", "index.js"),
+  join(rootDir, "dist", "server", "index.mjs"),
+];
 
 const routes = [
   { path: "/", file: "index.html" },
@@ -16,6 +20,26 @@ const routes = [
   { path: "/contact", file: "contact/index.html" },
   { path: "/sitemap.xml", file: "sitemap.xml" },
 ];
+
+async function resolveServerEntry() {
+  for (const candidate of serverEntryCandidates) {
+    try {
+      await access(candidate);
+      return candidate;
+    } catch {
+      // Try the next known output path.
+    }
+  }
+
+  return null;
+}
+
+const serverEntry = await resolveServerEntry();
+
+if (!serverEntry) {
+  console.warn("Skipping prerender: no server bundle was generated for this build.");
+  process.exit(0);
+}
 
 const { default: server } = await import(pathToFileURL(serverEntry).href);
 
