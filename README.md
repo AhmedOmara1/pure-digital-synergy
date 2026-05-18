@@ -1,6 +1,6 @@
 # Pure Digital
 
-A bilingual (Arabic / English) marketing website for **Pure Digital**, a UAE-based digital agency offering websites & e-commerce, visual identity, video production, paid advertising, and social media management.
+A bilingual (Arabic / English) marketing website for **Pure Digital**, a digital agency offering websites & e-commerce, visual identity, video production, paid advertising, and social media management.
 
 ## Tech Stack
 
