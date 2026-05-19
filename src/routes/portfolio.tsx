@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SectionHeading } from "@/components/site/SectionHeading";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { MotionReveal } from "@/components/site/MotionReveal";
 import { useI18n } from "@/i18n/LanguageProvider";
 import { TrendingUp } from "lucide-react";
 
@@ -95,6 +95,7 @@ const projects: Project[] = [
 function Portfolio() {
   const { t, lang } = useI18n();
   const [filter, setFilter] = useState<Category | "all">("all");
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
   const filters = [
@@ -105,6 +106,8 @@ function Portfolio() {
     { value: "ads", label: t.portfolio.filters.ads },
     { value: "content", label: t.portfolio.filters.content },
   ] as const;
+
+  const activeProject = projects.find((p) => p.id === activeId) ?? null;
 
   return (
     <>
@@ -117,69 +120,123 @@ function Portfolio() {
 
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Tabs value={filter} onValueChange={(v) => setFilter(v as Category | "all")}>
-            <TabsList className="mx-auto flex h-auto flex-wrap justify-center gap-1 bg-card/60">
-              {filters.map((f) => (
-                <TabsTrigger key={f.value} value={f.value} className="data-[state=active]:gradient-bg data-[state=active]:text-white">
-                  {f.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          <LayoutGroup>
+            <MotionReveal>
+              <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-1.5 rounded-full border border-border/60 bg-card/60 p-1.5 backdrop-blur">
+                {filters.map((f) => {
+                  const active = filter === f.value;
+                  return (
+                    <button
+                      key={f.value}
+                      onClick={() => setFilter(f.value as Category | "all")}
+                      className="relative rounded-full px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      {active && (
+                        <motion.span
+                          layoutId="portfolio-filter-pill"
+                          className="absolute inset-0 rounded-full gradient-bg"
+                          transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        />
+                      )}
+                      <span className={`relative z-10 ${active ? "text-white" : "text-muted-foreground hover:text-foreground"}`}>
+                        {f.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </MotionReveal>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((p) => (
-              <Dialog key={p.id}>
-                <DialogTrigger asChild>
-                  <Card className="group cursor-pointer overflow-hidden border-border/60 bg-card transition-all hover:-translate-y-1 hover:border-primary/50 hover:glow-shadow">
-                    <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.gradient}`}>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <p className="px-6 text-center font-display text-2xl font-bold text-white drop-shadow-lg">
-                          {p.name[lang]}
-                        </p>
+            <motion.div
+              layout
+              className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              transition={{ layout: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
+            >
+              <AnimatePresence mode="popLayout">
+                {filtered.map((p, i) => (
+                  <motion.div
+                    key={p.id}
+                    layout
+                    initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -16, scale: 0.96 }}
+                    transition={{ duration: 0.45, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -6 }}
+                    onClick={() => setActiveId(p.id)}
+                    className="cursor-pointer"
+                  >
+                    <Card className="group overflow-hidden border-border/60 bg-card transition-colors hover:border-primary/50 hover:glow-shadow">
+                      <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.gradient}`}>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <p className="px-6 text-center font-display text-2xl font-bold text-white drop-shadow-lg">
+                            {p.name[lang]}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-5">
-                      <div className="flex flex-wrap gap-2">
-                        {p.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
-                        ))}
+                      <div className="p-5">
+                        <div className="flex flex-wrap gap-2">
+                          {p.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+                          ))}
+                        </div>
+                        <h3 className="mt-3 font-display text-lg font-semibold">{p.name[lang]}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.desc[lang]}</p>
+                        <div className="mt-3 flex items-center gap-2 text-sm text-primary-glow">
+                          <TrendingUp className="h-4 w-4" />
+                          <span className="font-medium">{p.result[lang]}</span>
+                        </div>
                       </div>
-                      <h3 className="mt-3 font-display text-lg font-semibold">{p.name[lang]}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.desc[lang]}</p>
-                      <div className="mt-3 flex items-center gap-2 text-sm text-primary-glow">
-                        <TrendingUp className="h-4 w-4" />
-                        <span className="font-medium">{p.result[lang]}</span>
-                      </div>
-                    </div>
-                  </Card>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl">
-                  <div className={`aspect-video rounded-lg bg-gradient-to-br ${p.gradient} flex items-center justify-center`}>
-                    <p className="px-6 text-center font-display text-3xl font-bold text-white drop-shadow-lg">{p.name[lang]}</p>
-                  </div>
-                  <DialogHeader>
-                    <DialogTitle className="font-display text-2xl">{p.name[lang]}</DialogTitle>
-                    <DialogDescription className="text-base">{p.desc[lang]}</DialogDescription>
-                  </DialogHeader>
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">{tag}</Badge>
-                    ))}
-                  </div>
-                  <div className="rounded-lg border border-border/60 bg-navy-deep p-4">
-                    <p className="text-xs uppercase tracking-wider text-muted-foreground">{t.portfolio.result}</p>
-                    <p className="mt-1 font-display text-lg font-bold gradient-text">{p.result[lang]}</p>
-                  </div>
-                  <Link to="/contact">
-                    <Button className="w-full gradient-bg border-0">{t.portfolio.cta}</Button>
-                  </Link>
-                </DialogContent>
-              </Dialog>
-            ))}
-          </div>
+                    </Card>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          </LayoutGroup>
         </div>
       </section>
+
+      <Dialog open={!!activeProject} onOpenChange={(o) => !o && setActiveId(null)}>
+        <DialogContent className="max-w-2xl overflow-hidden p-0">
+          <AnimatePresence mode="wait">
+            {activeProject && (
+              <motion.div
+                key={activeProject.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-4 p-6"
+              >
+                <motion.div
+                  initial={{ scale: 1.04, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className={`aspect-video rounded-lg bg-gradient-to-br ${activeProject.gradient} flex items-center justify-center`}
+                >
+                  <p className="px-6 text-center font-display text-3xl font-bold text-white drop-shadow-lg">{activeProject.name[lang]}</p>
+                </motion.div>
+                <DialogHeader>
+                  <DialogTitle className="font-display text-2xl">{activeProject.name[lang]}</DialogTitle>
+                  <DialogDescription className="text-base">{activeProject.desc[lang]}</DialogDescription>
+                </DialogHeader>
+                <div className="flex flex-wrap gap-2">
+                  {activeProject.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">{tag}</Badge>
+                  ))}
+                </div>
+                <div className="rounded-lg border border-border/60 bg-navy-deep p-4">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">{t.portfolio.result}</p>
+                  <p className="mt-1 font-display text-lg font-bold gradient-text">{activeProject.result[lang]}</p>
+                </div>
+                <Link to="/contact" onClick={() => setActiveId(null)}>
+                  <Button className="w-full gradient-bg border-0">{t.portfolio.cta}</Button>
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
+
