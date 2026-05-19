@@ -17,6 +17,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PageTransition } from "@/components/site/PageTransition";
+import { ChatBot } from "@/components/site/ChatBot";
 
 function NotFoundComponent() {
   const { t } = useI18n();
@@ -133,6 +134,7 @@ function RootComponent() {
             </main>
             <Footer />
             <WhatsAppFloat />
+            <ChatBot />
             <Toaster />
           </div>
         </LanguageProvider>
