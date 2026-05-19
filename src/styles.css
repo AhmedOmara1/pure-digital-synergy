@@ -153,10 +153,47 @@
     box-shadow: 0 20px 60px -20px color-mix(in oklab, var(--primary) 50%, transparent);
   }
   .hero-radial {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     background:
       radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in oklab, var(--primary) 25%, transparent), transparent 70%),
       radial-gradient(ellipse 50% 50% at 80% 100%, color-mix(in oklab, var(--purple-accent) 20%, transparent), transparent 70%),
       var(--navy-deep);
+  }
+  .hero-radial::before,
+  .hero-radial::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.5;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+  .hero-radial::before {
+    background: radial-gradient(circle at 30% 30%, var(--primary), transparent 60%);
+    animation: aurora-drift 24s ease-in-out infinite;
+  }
+  .hero-radial::after {
+    background: radial-gradient(circle at 70% 70%, var(--purple-accent), transparent 60%);
+    animation: aurora-drift 30s ease-in-out infinite reverse;
+    animation-delay: -6s;
+  }
+  :root:not(.dark) .hero-radial::before,
+  :root:not(.dark) .hero-radial::after {
+    mix-blend-mode: multiply;
+    opacity: 0.35;
+  }
+  .hero-radial h1 {
+    animation: fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-radial p {
+    animation: fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 150ms;
   }
   .hero-aurora {
     position: relative;
