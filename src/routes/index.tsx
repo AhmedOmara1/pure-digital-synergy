@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Globe, Palette, Film, Megaphone, PenLine, Zap, Target, MessageSquare, ShieldCheck } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useI18n } from "@/i18n/LanguageProvider";
-import { useInView } from "@/hooks/use-in-view";
-import { cn } from "@/lib/utils";
+import { Particles } from "@/components/site/Particles";
+import { MotionReveal, MotionStagger, MotionItem } from "@/components/site/MotionReveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -16,6 +16,7 @@ import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/theme-provider";
+import { PageTransition } from "@/components/site/PageTransition";
 
 function NotFoundComponent() {
   const { t } = useI18n();
@@ -126,7 +127,9 @@ function RootComponent() {
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">
-              <Outlet />
+              <PageTransition>
+                <Outlet />
+              </PageTransition>
             </main>
             <Footer />
             <WhatsAppFloat />
