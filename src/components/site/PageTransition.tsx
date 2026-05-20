@@ -52,6 +52,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
   const location = useLocation();
   const variants = variantFor(location.pathname);
+  const skipRouteAnimation = location.pathname.startsWith("/portfolio");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -60,6 +61,15 @@ export function PageTransition({ children }: { children: ReactNode }) {
   }, [location.pathname]);
 
   if (reduce) {
+    return (
+      <>
+        <RouteProgress />
+        {children}
+      </>
+    );
+  }
+
+  if (skipRouteAnimation) {
     return (
       <>
         <RouteProgress />
