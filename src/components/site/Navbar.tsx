@@ -36,6 +36,7 @@ export function Navbar() {
             <Link
               key={l.to}
               to={l.to}
+              preload="intent"
               className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               activeProps={{ className: "rounded-md px-3 py-2 text-sm font-medium text-foreground bg-accent" }}
               activeOptions={{ exact: l.to === "/" }}
@@ -69,6 +70,7 @@ export function Navbar() {
               <Link
                 key={l.to}
                 to={l.to}
+                preload="intent"
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
                 activeProps={{ className: "rounded-md px-3 py-2.5 text-sm font-medium text-foreground bg-accent" }}
