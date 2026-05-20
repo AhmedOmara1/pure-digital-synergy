@@ -53,6 +53,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const location = useLocation();
   const variants = variantFor(location.pathname);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, [location.pathname]);
+
   if (reduce) {
     return (
       <>
