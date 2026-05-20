@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { useLocation, useRouterState } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 const routeVariants: Record<string, Variants> = {
   default: {
