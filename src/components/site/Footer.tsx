@@ -23,12 +23,12 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold">{t.footer.quickLinks}</h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/" className="hover:text-foreground">{t.nav.home}</Link></li>
-              <li><Link to="/about" className="hover:text-foreground">{t.nav.about}</Link></li>
-              <li><Link to="/services" className="hover:text-foreground">{t.nav.services}</Link></li>
+              <li><Link to="/" preload="intent" className="hover:text-foreground">{t.nav.home}</Link></li>
+              <li><Link to="/about" preload="intent" className="hover:text-foreground">{t.nav.about}</Link></li>
+              <li><Link to="/services" preload="intent" className="hover:text-foreground">{t.nav.services}</Link></li>
               
-              <li><Link to="/portfolio" className="hover:text-foreground">{t.nav.portfolio}</Link></li>
-              <li><Link to="/contact" className="hover:text-foreground">{t.nav.contact}</Link></li>
+              <li><Link to="/portfolio" preload="intent" className="hover:text-foreground">{t.nav.portfolio}</Link></li>
+              <li><Link to="/contact" preload="intent" className="hover:text-foreground">{t.nav.contact}</Link></li>
             </ul>
           </div>
 
