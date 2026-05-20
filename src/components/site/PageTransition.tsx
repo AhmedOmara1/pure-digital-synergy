@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { useLocation, useRouterState } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 const routeVariants: Record<string, Variants> = {
   default: {
@@ -52,6 +52,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
   const location = useLocation();
   const variants = variantFor(location.pathname);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, [location.pathname]);
 
   if (reduce) {
     return (
