@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PageTransition } from "@/components/site/PageTransition";
 import { ChatBot } from "@/components/site/ChatBot";
+import { ChunkRecovery } from "@/components/site/ChunkRecovery";
 
 function NotFoundComponent() {
   const { t } = useI18n();
@@ -123,6 +124,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <ChunkRecovery />
       <ThemeProvider>
         <LanguageProvider>
           <div className="flex min-h-screen flex-col">
