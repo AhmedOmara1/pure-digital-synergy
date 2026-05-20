@@ -75,7 +75,7 @@ function Home() {
               }}
               transition={{ duration: 0.6 }}
             >
-              <Link to="/contact">
+              <Link to="/contact" preload="intent">
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                   <Button size="lg" className="gradient-bg border-0 glow-shadow animate-glow-pulse">
                     {t.home.ctaPrimary}
@@ -83,7 +83,7 @@ function Home() {
                   </Button>
                 </motion.div>
               </Link>
-              <Link to="/portfolio">
+              <Link to="/portfolio" preload="intent">
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                   <Button size="lg" variant="outline">{t.home.ctaSecondary}</Button>
                 </motion.div>
