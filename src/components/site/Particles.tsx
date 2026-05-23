@@ -33,7 +33,7 @@ export function Particles({
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let raf = 0;
     const pointer = { x: -9999, y: -9999 };
 
@@ -47,12 +47,16 @@ export function Particles({
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.max(30, Math.min(140, Math.floor(width * height * density)));
+      const mobileScale = width < 640 ? 0.45 : 1;
+      const count = Math.max(
+        18,
+        Math.min(width < 640 ? 56 : 120, Math.floor(width * height * density * mobileScale)),
+      );
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * speed,
-        vy: (Math.random() - 0.5) * speed,
+        vx: (Math.random() - 0.5) * speed * mobileScale,
+        vy: (Math.random() - 0.5) * speed * mobileScale,
         r: Math.random() * 1.8 + 0.6,
       }));
     };
@@ -94,16 +98,13 @@ export function Particles({
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < linkDistance) {
             const alpha = 1 - dist / linkDistance;
-            ctx.strokeStyle = color.replace(
-              /rgba?\(([^)]+)\)/,
-              (_m, body) => {
-                const parts = body.split(",").map((s: string) => s.trim());
-                const r = parts[0];
-                const g = parts[1];
-                const b2 = parts[2];
-                return `rgba(${r}, ${g}, ${b2}, ${alpha * 0.35})`;
-              },
-            );
+            ctx.strokeStyle = color.replace(/rgba?\(([^)]+)\)/, (_m, body) => {
+              const parts = body.split(",").map((s: string) => s.trim());
+              const r = parts[0];
+              const g = parts[1];
+              const b2 = parts[2];
+              return `rgba(${r}, ${g}, ${b2}, ${alpha * 0.35})`;
+            });
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -150,9 +151,7 @@ export function Particles({
     <canvas
       ref={canvasRef}
       aria-hidden
-      className={
-        "pointer-events-none absolute inset-0 h-full w-full " + (className ?? "")
-      }
+      className={"pointer-events-none absolute inset-0 h-full w-full " + (className ?? "")}
     />
   );
 }

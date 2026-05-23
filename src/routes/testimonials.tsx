@@ -2,11 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { MotionReveal, MotionStagger, MotionItem } from "@/components/site/MotionReveal";
 import { useI18n } from "@/i18n/LanguageProvider";
-import { Star, User, Pause, Play } from "lucide-react";
+import { Star, User, Pause, Play, Quote } from "lucide-react";
 
 export const Route = createFileRoute("/testimonials")({
   head: () => ({
@@ -14,7 +21,10 @@ export const Route = createFileRoute("/testimonials")({
       { title: "Testimonials — Pure Digital" },
       { name: "description", content: "Real words from real clients across the UAE and beyond." },
       { property: "og:title", content: "Testimonials — Pure Digital" },
-      { property: "og:description", content: "What our clients say about working with Pure Digital." },
+      {
+        property: "og:description",
+        content: "What our clients say about working with Pure Digital.",
+      },
       { property: "og:url", content: "/testimonials" },
     ],
     links: [{ rel: "canonical", href: "/testimonials" }],
@@ -90,91 +100,113 @@ function Testimonials() {
               opts={{ loop: true, direction: dir, dragFree: false, align: "center" }}
               setApi={setApi}
             >
-            <CarouselContent>
-              {t.testimonials.items.map((item, i) => (
-                <CarouselItem key={item.name}>
-                  <AnimatePresence mode="wait">
-                    {current === i && (
-                      <motion.div
-                        key={item.name}
-                        initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -10, scale: 0.98 }}
-                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        <Card className="border-border/60 bg-card p-8 sm:p-12 text-center">
-                          <div className="flex justify-center gap-1">
-                            {Array.from({ length: 5 }).map((_, k) => (
-                              <Star key={k} className="h-5 w-5 fill-primary-glow text-primary-glow" />
-                            ))}
-                          </div>
-                          <p className="mt-6 font-display text-xl leading-relaxed sm:text-2xl">"{item.text}"</p>
-                          <div className="mt-8 flex flex-col items-center gap-3">
-                            <div className="flex h-14 w-14 items-center justify-center rounded-full gradient-bg">
-                              <User className="h-6 w-6 text-white" />
+              <CarouselContent>
+                {t.testimonials.items.map((item, i) => (
+                  <CarouselItem key={item.name}>
+                    <AnimatePresence mode="wait">
+                      {current === i && (
+                        <motion.div
+                          key={item.name}
+                          initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <Card className="glow-border-card relative overflow-hidden border-border/60 bg-card/90 p-8 text-center backdrop-blur sm:p-12">
+                            <motion.div
+                              aria-hidden
+                              className="absolute -left-4 -top-4 text-primary/10"
+                              animate={reduce ? undefined : { y: [0, -8, 0], rotate: [-3, 3, -3] }}
+                              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                            >
+                              <Quote className="h-24 w-24" />
+                            </motion.div>
+                            <div className="flex justify-center gap-1">
+                              {Array.from({ length: 5 }).map((_, k) => (
+                                <motion.span
+                                  key={k}
+                                  initial={{ opacity: 0, y: 6, scale: 0.8 }}
+                                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                                  transition={{ duration: 0.35, delay: k * 0.04 }}
+                                >
+                                  <Star className="h-5 w-5 fill-primary-glow text-primary-glow" />
+                                </motion.span>
+                              ))}
                             </div>
-                            <div>
-                              <p className="font-semibold">{item.name}</p>
-                              <p className="text-sm text-muted-foreground">{item.title}</p>
+                            <p className="mt-6 font-display text-xl leading-relaxed sm:text-2xl">
+                              "{item.text}"
+                            </p>
+                            <div className="mt-8 flex flex-col items-center gap-3">
+                              <div className="flex h-14 w-14 items-center justify-center rounded-full gradient-bg">
+                                <User className="h-6 w-6 text-white" />
+                              </div>
+                              <div>
+                                <p className="font-semibold">{item.name}</p>
+                                <p className="text-sm text-muted-foreground">{item.title}</p>
+                              </div>
                             </div>
-                          </div>
-                        </Card>
-                      </motion.div>
-                    )}
-                    {current !== i && (
-                      // placeholder to preserve slide height so Embla can measure
-                      <div className="invisible">
-                        <Card className="p-8 sm:p-12">
-                          <p className="font-display text-xl sm:text-2xl">"{item.text}"</p>
-                        </Card>
-                      </div>
-                    )}
-                  </AnimatePresence>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+                          </Card>
+                        </motion.div>
+                      )}
+                      {current !== i && (
+                        // placeholder to preserve slide height so Embla can measure
+                        <div className="invisible">
+                          <Card className="p-8 sm:p-12">
+                            <p className="font-display text-xl sm:text-2xl">"{item.text}"</p>
+                          </Card>
+                        </div>
+                      )}
+                    </AnimatePresence>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
 
-          {/* Controls */}
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setPlaying((p) => !p)}
-              aria-label={playing ? "Pause autoplay" : "Play autoplay"}
-              className="rounded-full"
-            >
-              {playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-            </Button>
-            <div className="flex items-center gap-2">
-              {Array.from({ length: count }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to slide ${i + 1}`}
-                  className="group relative h-2 w-6 overflow-hidden rounded-full bg-border/60"
-                >
-                  <motion.span
-                    className="absolute inset-y-0 left-0 rounded-full gradient-bg"
-                    animate={{ width: current === i ? "100%" : "0%" }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </button>
-              ))}
+            {/* Controls */}
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setPlaying((p) => !p)}
+                aria-label={playing ? "Pause autoplay" : "Play autoplay"}
+                className="rounded-full"
+              >
+                {playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              </Button>
+              <div className="flex items-center gap-2">
+                {Array.from({ length: count }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className="group relative h-2 w-6 overflow-hidden rounded-full bg-border/60"
+                  >
+                    <motion.span
+                      className="absolute inset-y-0 left-0 rounded-full gradient-bg"
+                      animate={{ width: current === i ? "100%" : "0%" }}
+                      transition={{ duration: 0.4 }}
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
         </MotionReveal>
       </section>
 
       <section className="border-t border-border/50 bg-card/30 py-16">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6">
           <MotionReveal>
-            <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">{t.testimonials.trusted}</p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              {t.testimonials.trusted}
+            </p>
           </MotionReveal>
-          <MotionStagger className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6" stagger={0.06}>
+          <MotionStagger
+            className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6"
+            stagger={0.06}
+          >
             {["Bloom", "Mansouri", "Shamsi", "Nakheel", "Atlas", "Noor"].map((b) => (
               <MotionItem key={b}>
                 <div className="flex h-16 items-center justify-center rounded-lg border border-border/60 bg-card font-display text-lg font-bold text-muted-foreground transition-colors hover:text-foreground">
