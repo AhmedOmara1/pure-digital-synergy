@@ -202,11 +202,16 @@ function Home() {
 
           {/* Stats — alternating directional entrance + count-up + glow border */}
           {(() => {
-            const dirs: Array<"left" | "right" | "up"> = ["left", "right", "left", "right"];
+            const dirs: Array<"slideRight" | "slideDown" | "slideLeft" | "slideUp"> = [
+              "slideRight",
+              "slideDown",
+              "slideLeft",
+              "slideUp",
+            ];
             return (
               <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
                 {t.home.stats.map((s, i) => (
-                  <MotionReveal key={s.label} variant={dirs[i]} delay={i * 0.08}>
+                  <MotionReveal key={s.label} variant={dirs[i]} delay={i * 0.08} once={false}>
                     <motion.div
                       whileHover={{ y: -8, scale: 1.05 }}
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
@@ -230,11 +235,11 @@ function Home() {
       {/* ── Services strip ───────────────────────────────── */}
       <section className="border-y border-border/50 bg-card/30 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <MotionReveal className="mx-auto max-w-2xl text-center">
+          <MotionReveal className="mx-auto max-w-2xl text-center" once={false}>
             <h2 className="font-display text-3xl font-bold sm:text-4xl">{t.home.servicesTitle}</h2>
             <p className="mt-3 text-muted-foreground">{t.home.servicesSub}</p>
           </MotionReveal>
-          <MotionStagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" stagger={0.09}>
+          <MotionStagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" stagger={0.09} once={false}>
             {serviceShort.map((s, i) => {
               const Icon = serviceIcons[i];
               return (
@@ -279,12 +284,13 @@ function Home() {
             <h2 className="font-display text-3xl font-bold sm:text-4xl">{t.home.whyTitle}</h2>
             <p className="mt-3 text-muted-foreground">{t.home.whySub}</p>
           </MotionReveal>
-          <MotionStagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+          <MotionStagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1} once={false}>
             {t.home.why.map((w, i) => {
               const Icon = whyIcons[i];
               const isZap = i === 0; // "Fast Delivery / تنفيذ سريع"
+              const slideDirs = ["slideRight", "slideDown", "slideLeft", "slideUp"] as const;
               return (
-                <MotionItem key={w.title} variant="up">
+                <MotionItem key={w.title} variant={slideDirs[i]}>
                   <TiltCard>
                     <Card className="glow-border-card h-full border-border/60 bg-card p-6 hover:border-primary/40">
                       {/* Animated icon entrance */}

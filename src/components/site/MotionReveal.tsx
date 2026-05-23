@@ -1,7 +1,18 @@
 import { motion, useReducedMotion, type Transition, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
-type Variant = "up" | "fade" | "scale" | "left" | "right" | "blur" | "softScale";
+type Variant =
+  | "up"
+  | "fade"
+  | "scale"
+  | "left"
+  | "right"
+  | "blur"
+  | "softScale"
+  | "slideRight"
+  | "slideDown"
+  | "slideLeft"
+  | "slideUp";
 
 export const premiumEase = [0.22, 1, 0.36, 1] as const;
 export const premiumSpring: Transition = { type: "spring", stiffness: 260, damping: 28, mass: 0.8 };
@@ -48,6 +59,22 @@ const buildVariants = (variant: Variant): Variants => {
       hidden: { opacity: 0, y: 18, scale: 0.98, filter: "blur(6px)" },
       show: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
     },
+    slideRight: {
+      hidden: { opacity: 0, x: -48 },
+      show: { opacity: 1, x: 0 },
+    },
+    slideDown: {
+      hidden: { opacity: 0, y: -48 },
+      show: { opacity: 1, y: 0 },
+    },
+    slideLeft: {
+      hidden: { opacity: 0, x: 48 },
+      show: { opacity: 1, x: 0 },
+    },
+    slideUp: {
+      hidden: { opacity: 0, y: 48 },
+      show: { opacity: 1, y: 0 },
+    },
   };
   return base[variant];
 };
@@ -88,11 +115,13 @@ export function MotionStagger({
   className,
   stagger = 0.08,
   delayChildren = 0,
+  once = true,
 }: {
   children: ReactNode;
   className?: string;
   stagger?: number;
   delayChildren?: number;
+  once?: boolean;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -100,7 +129,7 @@ export function MotionStagger({
       className={className}
       initial={reduce ? "show" : "hidden"}
       whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once, amount: 0.15 }}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: stagger, delayChildren } },
