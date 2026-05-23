@@ -111,10 +111,24 @@ function Portfolio() {
 
   return (
     <>
-      <section className="hero-radial py-20 sm:py-24">
+      <section className="hero-radial py-20 sm:py-24 overflow-hidden">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <h1 className="font-display text-4xl font-bold gradient-text sm:text-5xl md:text-6xl">{t.portfolio.title}</h1>
-          <p className="mt-4 text-lg text-muted-foreground">{t.portfolio.sub}</p>
+          <motion.h1
+            className="font-display text-4xl font-bold gradient-text sm:text-5xl md:text-6xl"
+            initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {t.portfolio.title}
+          </motion.h1>
+          <motion.p
+            className="mt-4 text-lg text-muted-foreground"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {t.portfolio.sub}
+          </motion.p>
         </div>
       </section>
 
@@ -153,15 +167,17 @@ function Portfolio() {
               transition={{ layout: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
             >
               <AnimatePresence mode="popLayout">
-                {filtered.map((p, i) => (
-                  <motion.div
-                    key={p.id}
-                    layout
-                    initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -16, scale: 0.96 }}
-                    transition={{ duration: 0.45, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                    whileHover={{ y: -6 }}
+                {filtered.map((p, i) => {
+                  const dir = i % 3 === 0 ? -24 : i % 3 === 1 ? 0 : 24;
+                  return (
+                    <motion.div
+                      key={p.id}
+                      layout
+                      initial={{ opacity: 0, y: 24, x: dir, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -16, scale: 0.96 }}
+                      transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ y: -6 }}
                     onClick={() => setActiveId(p.id)}
                     className="cursor-pointer"
                   >
@@ -188,7 +204,8 @@ function Portfolio() {
                       </div>
                     </Card>
                   </motion.div>
-                ))}
+                );
+                })}
               </AnimatePresence>
             </motion.div>
           </LayoutGroup>

@@ -65,8 +65,9 @@ export function ChatBot() {
     }
   };
 
-  // Position: opposite side from WhatsApp float (which sits bottom-right)
-  const sideClass = "left-5 sm:left-6";
+  // Position: use logical 'start' so it's always opposite WhatsApp (which uses 'end-6')
+  // In LTR → left side; In RTL (Arabic) → right side. Never collide.
+  const sideClass = "start-5 sm:start-6";
 
   return (
     <>

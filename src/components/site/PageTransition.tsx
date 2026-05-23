@@ -4,24 +4,24 @@ import { useEffect, type ReactNode } from "react";
 
 const routeVariants: Record<string, Variants> = {
   default: {
-    initial: { opacity: 0, y: 14 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
+    initial: { opacity: 0, y: 20, filter: "blur(4px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+    exit:    { opacity: 0, y: -12, filter: "blur(2px)" },
   },
   fade: {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
+    initial: { opacity: 0, filter: "blur(3px)" },
+    animate: { opacity: 1, filter: "blur(0px)" },
+    exit:    { opacity: 0, filter: "blur(3px)" },
   },
   slide: {
-    initial: { opacity: 0, x: 32 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -32 },
+    initial: { opacity: 0, x: 40, filter: "blur(2px)" },
+    animate: { opacity: 1, x: 0,  filter: "blur(0px)" },
+    exit:    { opacity: 0, x: -40, filter: "blur(2px)" },
   },
   scale: {
-    initial: { opacity: 0, scale: 0.97 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 1.02 },
+    initial: { opacity: 0, scale: 0.96, filter: "blur(6px)" },
+    animate: { opacity: 1, scale: 1,    filter: "blur(0px)" },
+    exit:    { opacity: 0, scale: 1.02, filter: "blur(4px)" },
   },
 };
 
@@ -88,7 +88,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
           animate="animate"
           exit="exit"
           variants={variants}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
         >
           {children}
         </motion.div>

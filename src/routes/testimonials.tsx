@@ -57,24 +57,39 @@ function Testimonials() {
 
   return (
     <>
-      <section className="hero-radial py-20 sm:py-24">
+      <section className="hero-radial py-20 sm:py-24 overflow-hidden">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <h1 className="font-display text-4xl font-bold gradient-text sm:text-5xl md:text-6xl">{t.testimonials.title}</h1>
-          <p className="mt-4 text-lg text-muted-foreground">{t.testimonials.sub}</p>
+          <motion.h1
+            className="font-display text-4xl font-bold gradient-text sm:text-5xl md:text-6xl"
+            initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {t.testimonials.title}
+          </motion.h1>
+          <motion.p
+            className="mt-4 text-lg text-muted-foreground"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {t.testimonials.sub}
+          </motion.p>
         </div>
       </section>
 
-      <section className="py-20">
-        <div
-          className="mx-auto max-w-4xl px-4 sm:px-6"
-          onMouseEnter={() => setPlaying(false)}
-          onMouseLeave={() => setPlaying(true)}
-        >
-          <Carousel
-            className="w-full"
-            opts={{ loop: true, direction: dir, dragFree: false, align: "center" }}
-            setApi={setApi}
+      <section className="py-20 overflow-hidden">
+        <MotionReveal variant="up" duration={0.8}>
+          <div
+            className="mx-auto max-w-4xl px-4 sm:px-6"
+            onMouseEnter={() => setPlaying(false)}
+            onMouseLeave={() => setPlaying(true)}
           >
+            <Carousel
+              className="w-full"
+              opts={{ loop: true, direction: dir, dragFree: false, align: "center" }}
+              setApi={setApi}
+            >
             <CarouselContent>
               {t.testimonials.items.map((item, i) => (
                 <CarouselItem key={item.name}>
@@ -151,6 +166,7 @@ function Testimonials() {
             </div>
           </div>
         </div>
+        </MotionReveal>
       </section>
 
       <section className="border-t border-border/50 bg-card/30 py-16">
