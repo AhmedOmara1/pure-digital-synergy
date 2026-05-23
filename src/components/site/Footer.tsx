@@ -9,6 +9,7 @@ import {
   MotionStagger,
   premiumSpring,
 } from "@/components/site/MotionReveal";
+import { socialLinks } from "@/lib/social-links";
 import logoDark from "@/assets/logo.png";
 import logoLight from "@/assets/logo-dark.png";
 
@@ -82,17 +83,28 @@ export function Footer() {
           <MotionItem>
             <h4 className="text-sm font-semibold">{t.footer.follow}</h4>
             <div className="mt-4 flex gap-3">
-              {[Instagram, Linkedin, MessageCircle].map((Icon, index) => (
-                <motion.span
-                  key={index}
-                  whileHover={{ y: -3, scale: 1.08 }}
-                  whileTap={{ scale: 0.96 }}
-                  transition={premiumSpring}
-                  className="rounded-full border border-border p-2 text-muted-foreground transition-colors hover:border-primary/60 hover:text-primary-glow"
-                >
-                  <Icon className="h-4 w-4" />
-                </motion.span>
-              ))}
+              {[
+                { icon: Instagram, label: "Instagram", href: socialLinks.instagram },
+                { icon: Linkedin, label: "LinkedIn", href: null },
+                { icon: MessageCircle, label: "WhatsApp", href: socialLinks.whatsapp },
+              ].map(({ icon: Icon, label, href }) => {
+                const Comp = href ? motion.a : motion.span;
+                return (
+                  <Comp
+                    key={label}
+                    href={href ?? undefined}
+                    target={href ? "_blank" : undefined}
+                    rel={href ? "noopener noreferrer" : undefined}
+                    aria-label={label}
+                    whileHover={{ y: -3, scale: 1.08 }}
+                    whileTap={{ scale: 0.96 }}
+                    transition={premiumSpring}
+                    className="rounded-full border border-border p-2 text-muted-foreground transition-colors hover:border-primary/60 hover:text-primary-glow"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </Comp>
+                );
+              })}
             </div>
           </MotionItem>
         </MotionStagger>

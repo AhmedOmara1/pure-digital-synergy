@@ -9,18 +9,39 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { MotionReveal } from "@/components/site/MotionReveal";
 import { useI18n } from "@/i18n/LanguageProvider";
+import { socialLinks } from "@/lib/social-links";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Pure Digital" },
-      { name: "description", content: "Start your project with Pure Digital. Free consultation, no commitment. We reply within one business day." },
+      {
+        name: "description",
+        content:
+          "Start your project with Pure Digital. Free consultation, no commitment. We reply within one business day.",
+      },
       { property: "og:title", content: "Contact — Pure Digital" },
-      { property: "og:description", content: "Tell us about your project. Free consultation, no commitment." },
+      {
+        property: "og:description",
+        content: "Tell us about your project. Free consultation, no commitment.",
+      },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -55,7 +76,12 @@ function Contact() {
   const info = [
     { icon: MessageCircle, label: t.contact.whatsapp, value: "—", href: null },
     { icon: Mail, label: t.contact.email, value: "—", href: null },
-    { icon: Instagram, label: t.contact.instagram, value: "—", href: null },
+    {
+      icon: Instagram,
+      label: t.contact.instagram,
+      value: "@pure.digital.company",
+      href: socialLinks.instagram,
+    },
     { icon: Linkedin, label: t.contact.linkedin, value: "—", href: null },
     { icon: Clock, label: t.contact.hours, value: t.contact.hoursValue, href: null },
   ];
@@ -87,7 +113,6 @@ function Contact() {
       {/* ── Form + Info ──────────────────────────── */}
       <section className="py-20 overflow-hidden">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr,1.4fr]">
-
           {/* Info cards — slide in from left, staggered */}
           <div className="space-y-3">
             {info.map((item, i) => {
@@ -104,22 +129,33 @@ function Contact() {
                         initial={{ scale: 0, rotate: -15 }}
                         whileInView={{ scale: 1, rotate: 0 }}
                         viewport={{ once: true }}
-                        transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 + i * 0.06 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 260,
+                          damping: 18,
+                          delay: 0.1 + i * 0.06,
+                        }}
                         whileHover={{ scale: 1.25, rotate: 10 }}
                       >
                         <Icon className="h-5 w-5" />
                       </motion.div>
                       <div>
-                        <p className="text-xs uppercase tracking-wider text-muted-foreground">{item.label}</p>
+                        <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                          {item.label}
+                        </p>
                         <p className="mt-1 text-sm font-medium">{item.value}</p>
                       </div>
                     </Card>
                   </motion.div>
                 </MotionReveal>
               );
-              return item.href
-                ? <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">{content}</a>
-                : <div key={item.label}>{content}</div>;
+              return item.href ? (
+                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">
+                  {content}
+                </a>
+              ) : (
+                <div key={item.label}>{content}</div>
+              );
             })}
           </div>
 
@@ -128,72 +164,116 @@ function Contact() {
             <Card className="border-border/60 bg-card p-6 sm:p-8">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                  <FormField control={form.control} name="name" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t.contact.form.name} *</FormLabel>
-                      <FormControl><Input {...field} /></FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t.contact.form.name} *</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <div className="grid gap-5 sm:grid-cols-2">
-                    <FormField control={form.control} name="email" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t.contact.form.email} *</FormLabel>
-                        <FormControl><Input type="email" {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={form.control} name="phone" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t.contact.form.phone}</FormLabel>
-                        <FormControl><Input {...field} /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t.contact.form.email} *</FormLabel>
+                          <FormControl>
+                            <Input type="email" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t.contact.form.phone}</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
                   <div className="grid gap-5 sm:grid-cols-2">
-                    <FormField control={form.control} name="service" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t.contact.form.service} *</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger><SelectValue placeholder={t.contact.form.servicePlaceholder} /></SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {t.contact.form.services.map((s) => (
-                              <SelectItem key={s} value={s}>{s}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={form.control} name="budget" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t.contact.form.budget}</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger><SelectValue placeholder={t.contact.form.budgetPlaceholder} /></SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {t.contact.form.budgets.map((b) => (
-                              <SelectItem key={b} value={b}>{b}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
+                    <FormField
+                      control={form.control}
+                      name="service"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t.contact.form.service} *</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder={t.contact.form.servicePlaceholder} />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {t.contact.form.services.map((s) => (
+                                <SelectItem key={s} value={s}>
+                                  {s}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="budget"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t.contact.form.budget}</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder={t.contact.form.budgetPlaceholder} />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {t.contact.form.budgets.map((b) => (
+                                <SelectItem key={b} value={b}>
+                                  {b}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                  <FormField control={form.control} name="message" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t.contact.form.message} *</FormLabel>
-                      <FormControl><Textarea rows={5} {...field} /></FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t.contact.form.message} *</FormLabel>
+                        <FormControl>
+                          <Textarea rows={5} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button type="submit" size="lg" className="w-full gradient-bg border-0 glow-shadow shine-btn">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full gradient-bg border-0 glow-shadow shine-btn"
+                    >
                       {t.contact.form.submit}
                     </Button>
                   </motion.div>

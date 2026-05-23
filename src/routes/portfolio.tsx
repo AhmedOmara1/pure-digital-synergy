@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/dialog";
 import { MotionReveal } from "@/components/site/MotionReveal";
 import { useI18n } from "@/i18n/LanguageProvider";
-import { TrendingUp } from "lucide-react";
+import { ExternalLink, Instagram, TrendingUp } from "lucide-react";
+import { socialLinks } from "@/lib/social-links";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
@@ -156,6 +157,21 @@ function Portfolio() {
           >
             {t.portfolio.sub}
           </motion.p>
+          <motion.a
+            href={socialLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Button className="gradient-bg border-0 shine-btn">
+              <Instagram className="h-4 w-4" />
+              {lang === "ar" ? "شاهد أعمالنا على إنستغرام" : "View Instagram Portfolio"}
+              <ExternalLink className="h-4 w-4" />
+            </Button>
+          </motion.a>
         </div>
       </section>
 

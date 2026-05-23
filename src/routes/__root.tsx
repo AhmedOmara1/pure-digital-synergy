@@ -20,6 +20,7 @@ import { PageTransition } from "@/components/site/PageTransition";
 import { ChatBot } from "@/components/site/ChatBot";
 import { ChunkRecovery } from "@/components/site/ChunkRecovery";
 import { AmbientStage, ScrollProgress } from "@/components/site/AmbientStage";
+import { socialLinks } from "@/lib/social-links";
 
 function NotFoundComponent() {
   const { t } = useI18n();
@@ -124,7 +125,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           email: "info@puredigital.ae",
           areaServed: "AE",
           address: { "@type": "PostalAddress", addressCountry: "AE" },
-          sameAs: ["https://instagram.com/puredigital.ae"],
+          sameAs: [socialLinks.instagram],
         }),
       },
     ],

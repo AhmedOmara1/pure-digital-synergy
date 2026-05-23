@@ -7,7 +7,7 @@ Reply in the same language the user writes in (English or Arabic). Be concise, w
 About Pure Digital:
 - UAE-based bilingual (AR/EN) digital agency. Tagline: "Where vision meets execution."
 - We sell outcomes, not deliverables. 55+ projects delivered, 32+ happy clients, 90% satisfaction guarantee.
-- Hours: Sun–Thu, 9AM–6PM (GST). Email: info@puredigital.ae. Instagram: @puredigital.ae.
+- Hours: Sun–Thu, 9AM–6PM (GST). Email: info@puredigital.ae. Instagram: @pure.digital.company.
 
 Core services:
 1) Website & E-Commerce Development — custom UI/UX, WooCommerce/Shopify/custom, SEO baked in, responsive, SSL, PageSpeed 90+, 30-day support. Basic site in 7 days; advanced/e-commerce in 14–21 days.
@@ -35,7 +35,7 @@ export const chatWithBot = createServerFn({ method: "POST" })
   .inputValidator(
     z.object({
       messages: z.array(messageSchema).min(1).max(30),
-    })
+    }),
   )
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
@@ -54,17 +54,17 @@ export const chatWithBot = createServerFn({ method: "POST" })
           model: "llama-3.3-70b-versatile",
           temperature: 0.6,
           max_tokens: 600,
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            ...data.messages,
-          ],
+          messages: [{ role: "system", content: SYSTEM_PROMPT }, ...data.messages],
         }),
       });
 
       if (!res.ok) {
         const text = await res.text();
         console.error("Groq error", res.status, text);
-        return { reply: "", error: "Sorry, the assistant is having trouble right now. Please try again in a moment." };
+        return {
+          reply: "",
+          error: "Sorry, the assistant is having trouble right now. Please try again in a moment.",
+        };
       }
 
       const json = (await res.json()) as {
