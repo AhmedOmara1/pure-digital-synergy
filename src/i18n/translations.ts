@@ -227,8 +227,8 @@ export const translations = {
       ctaPrimary: "ابدأ معنا الآن",
       ctaSecondary: "شاهد أعمالنا",
       stats: [
-        { num: "+55", label: "مشروع منجز" },
-        { num: "+32", label: "عميل سعيد" },
+        { num: "55+", label: "مشروع منجز" },
+        { num: "32+", label: "عميل سعيد" },
         { num: "5", label: "خدمات رئيسية" },
         { num: "90%", label: "ضمان الرضا" },
       ],
