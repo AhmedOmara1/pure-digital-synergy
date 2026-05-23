@@ -1,12 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Globe, Palette, Film, Megaphone, PenLine, Zap, Target, MessageSquare, ShieldCheck } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  Globe,
+  Palette,
+  Film,
+  Megaphone,
+  PenLine,
+  Zap,
+  Target,
+  MessageSquare,
+  ShieldCheck,
+} from "lucide-react";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useI18n } from "@/i18n/LanguageProvider";
 import { Particles } from "@/components/site/Particles";
-import { MotionReveal, MotionStagger, MotionItem } from "@/components/site/MotionReveal";
+import {
+  MotionReveal,
+  MotionStagger,
+  MotionItem,
+  SplitTextReveal,
+  premiumEase,
+} from "@/components/site/MotionReveal";
 import { AnimatedCounter } from "@/components/site/AnimatedCounter";
 import { cn } from "@/lib/utils";
 
@@ -14,9 +31,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Pure Digital — We Build Your Digital Presence" },
-      { name: "description", content: "Websites, branding, video, and paid ads engineered to grow and sell. UAE-based bilingual digital agency." },
+      {
+        name: "description",
+        content:
+          "Websites, branding, video, and paid ads engineered to grow and sell. UAE-based bilingual digital agency.",
+      },
       { property: "og:title", content: "Pure Digital — We Build Your Digital Presence" },
-      { property: "og:description", content: "Websites, branding, video, and paid ads engineered to grow and sell." },
+      {
+        property: "og:description",
+        content: "Websites, branding, video, and paid ads engineered to grow and sell.",
+      },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -58,14 +82,39 @@ function Home() {
   const serviceShort = t.home.servicesShort;
   const reduce = useReducedMotion();
   const isAr = lang === "ar";
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const springX = useSpring(pointerX, { stiffness: 90, damping: 24, mass: 0.5 });
+  const springY = useSpring(pointerY, { stiffness: 90, damping: 24, mass: 0.5 });
+  const heroX = useTransform(springX, [-1, 1], reduce ? ["0px", "0px"] : ["10px", "-10px"]);
+  const heroY = useTransform(springY, [-1, 1], reduce ? ["0px", "0px"] : ["8px", "-8px"]);
 
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="hero-aurora relative overflow-hidden">
-        <div aria-hidden className="aurora-blob aurora-blob-1" />
-        <div aria-hidden className="aurora-blob aurora-blob-2" />
-        <div aria-hidden className="aurora-blob aurora-blob-3" />
+      <section
+        className="hero-aurora relative overflow-hidden"
+        onMouseMove={(event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
+          pointerY.set((event.clientY - rect.top) / rect.height - 0.5);
+        }}
+        onMouseLeave={() => {
+          pointerX.set(0);
+          pointerY.set(0);
+        }}
+      >
+        <motion.div
+          aria-hidden
+          className="aurora-blob aurora-blob-1"
+          style={{ x: heroX, y: heroY }}
+        />
+        <motion.div
+          aria-hidden
+          className="aurora-blob aurora-blob-2"
+          style={{ x: heroY, y: heroX }}
+        />
+        <motion.div aria-hidden className="aurora-blob aurora-blob-3" style={{ x: heroX }} />
         <Particles color="rgba(140, 170, 255, 0.85)" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <motion.div
@@ -84,7 +133,7 @@ function Home() {
                 hidden: { opacity: 0, y: 10 },
                 show: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: premiumEase }}
             >
               <span className="animate-lightning">
                 <Zap className="h-3.5 w-3.5 text-yellow-400" />
@@ -103,7 +152,7 @@ function Home() {
               }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="animate-shimmer">{t.home.heroTitle}</span>
+              <SplitTextReveal text={t.home.heroTitle} className="animate-shimmer" />
             </motion.h1>
 
             <motion.p
@@ -112,7 +161,7 @@ function Home() {
                 hidden: { opacity: 0, y: 18 },
                 show: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: premiumEase }}
             >
               {t.home.heroSub}
             </motion.p>
@@ -123,19 +172,29 @@ function Home() {
                 hidden: { opacity: 0, y: 14 },
                 show: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: premiumEase }}
             >
               <Link to="/contact" preload="intent">
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                  <Button size="lg" className="gradient-bg border-0 glow-shadow animate-glow-pulse shine-btn">
+                  <Button
+                    size="lg"
+                    className="gradient-bg border-0 glow-shadow animate-glow-pulse shine-btn"
+                  >
                     {t.home.ctaPrimary}
-                    <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
+                    <motion.span
+                      animate={{ x: isAr ? [-1, 1, -1] : [1, -1, 1] }}
+                      transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
+                    </motion.span>
                   </Button>
                 </motion.div>
               </Link>
               <Link to="/portfolio" preload="intent">
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                  <Button size="lg" variant="outline" className="shine-btn">{t.home.ctaSecondary}</Button>
+                  <Button size="lg" variant="outline" className="shine-btn">
+                    {t.home.ctaSecondary}
+                  </Button>
                 </motion.div>
               </Link>
             </motion.div>
@@ -197,8 +256,12 @@ function Home() {
                         >
                           <Icon className="h-6 w-6 text-white" />
                         </motion.div>
-                        <p className="mt-4 font-display text-base font-semibold leading-snug">{s.title}</p>
-                        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.tag}</p>
+                        <p className="mt-4 font-display text-base font-semibold leading-snug">
+                          {s.title}
+                        </p>
+                        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                          {s.tag}
+                        </p>
                       </Card>
                     </motion.div>
                   </Link>
@@ -254,14 +317,19 @@ function Home() {
       {/* ── CTA banner ───────────────────────────────────── */}
       <section className="relative overflow-hidden border-t border-border/50 bg-navy-deep py-16">
         <Particles color="rgba(160, 130, 255, 0.7)" density={0.00008} linkDistance={110} />
-        <MotionReveal variant="scale" className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6">
+        <MotionReveal
+          variant="scale"
+          className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6"
+        >
           <h3 className="animate-hue-shift font-display text-2xl font-bold sm:text-3xl gradient-text">
             {t.contact.ctaBanner}
           </h3>
           <p className="mt-2 text-muted-foreground">{t.contact.ctaBannerSub}</p>
           <Link to="/contact" className="mt-6 inline-block">
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Button size="lg" className="gradient-bg border-0 shine-btn">{t.home.ctaPrimary}</Button>
+              <Button size="lg" className="gradient-bg border-0 shine-btn">
+                {t.home.ctaPrimary}
+              </Button>
             </motion.div>
           </Link>
         </MotionReveal>

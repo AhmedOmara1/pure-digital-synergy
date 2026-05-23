@@ -19,6 +19,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { PageTransition } from "@/components/site/PageTransition";
 import { ChatBot } from "@/components/site/ChatBot";
 import { ChunkRecovery } from "@/components/site/ChunkRecovery";
+import { AmbientStage, ScrollProgress } from "@/components/site/AmbientStage";
 
 function NotFoundComponent() {
   const { t } = useI18n();
@@ -43,10 +44,21 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="font-display text-xl font-semibold">This page didn't load</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Try refreshing or head back home.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Something went wrong. Try refreshing or head back home.
+        </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <Button onClick={() => { router.invalidate(); reset(); }}>Try again</Button>
-          <a href="/"><Button variant="outline">Go home</Button></a>
+          <Button
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+          >
+            Try again
+          </Button>
+          <a href="/">
+            <Button variant="outline">Go home</Button>
+          </a>
         </div>
       </div>
     </div>
@@ -59,22 +71,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Pure Digital — UAE Digital Agency" },
-      { name: "description", content: "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency." },
+      {
+        name: "description",
+        content:
+          "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency.",
+      },
       { property: "og:site_name", content: "Pure Digital" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Pure Digital — UAE Digital Agency" },
       { name: "twitter:title", content: "Pure Digital — UAE Digital Agency" },
-      { property: "og:description", content: "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency." },
-      { name: "twitter:description", content: "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ec37af88-e088-4f93-b620-3c0ec4cf24fe" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ec37af88-e088-4f93-b620-3c0ec4cf24fe" },
+      {
+        property: "og:description",
+        content:
+          "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Pure Digital builds websites, brands, video, and paid ads that grow and sell. UAE-based bilingual agency.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ec37af88-e088-4f93-b620-3c0ec4cf24fe",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ec37af88-e088-4f93-b620-3c0ec4cf24fe",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap",
+      },
     ],
     scripts: [
       {
@@ -83,14 +118,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           name: "Pure Digital",
-          description: "UAE-based digital agency: websites, branding, video, paid ads, and content.",
+          description:
+            "UAE-based digital agency: websites, branding, video, paid ads, and content.",
           url: "https://puredigital.ae",
           email: "info@puredigital.ae",
           areaServed: "AE",
           address: { "@type": "PostalAddress", addressCountry: "AE" },
-          sameAs: [
-            "https://instagram.com/puredigital.ae",
-          ],
+          sameAs: ["https://instagram.com/puredigital.ae"],
         }),
       },
     ],
@@ -128,6 +162,8 @@ function RootComponent() {
       <ThemeProvider>
         <LanguageProvider>
           <div className="flex min-h-screen flex-col">
+            <AmbientStage />
+            <ScrollProgress />
             <Navbar />
             <main className="flex-1">
               <PageTransition>
