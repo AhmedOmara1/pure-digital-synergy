@@ -202,16 +202,10 @@ function Home() {
 
           {/* Stats — alternating directional entrance + count-up + glow border */}
           {(() => {
-            const dirs: Array<"slideRight" | "slideDown" | "slideLeft" | "slideUp"> = [
-              "slideRight",
-              "slideDown",
-              "slideLeft",
-              "slideUp",
-            ];
             return (
               <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
                 {t.home.stats.map((s, i) => (
-                  <MotionReveal key={s.label} variant={dirs[i]} delay={i * 0.08} once={false}>
+                  <MotionReveal key={s.label} variant="softScale" delay={i * 0.08} once={false}>
                     <motion.div
                       whileHover={{ y: -8, scale: 1.05 }}
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
