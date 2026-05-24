@@ -280,7 +280,7 @@ function Home() {
               const Icon = whyIcons[i];
               const isZap = i === 0;
               return (
-                <MotionItem key={w.title} variant="softScale">
+                <MotionItem key={w.title} variant="softScale" delay={i * 0.1}>
                   <TiltCard>
                     <Card className="glow-border-card h-full border-border/60 bg-card p-6 hover:border-primary/40">
                       {/* Animated icon entrance */}
