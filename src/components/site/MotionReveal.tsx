@@ -129,7 +129,7 @@ export function MotionStagger({
       className={className}
       initial={reduce ? "show" : "hidden"}
       whileInView="show"
-      viewport={{ once, amount: 0.15 }}
+      viewport={{ once, amount: 0.1, margin: "0px 0px 150px 0px" }}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: stagger, delayChildren } },
