@@ -237,7 +237,7 @@ function Home() {
             {serviceShort.map((s, i) => {
               const Icon = serviceIcons[i];
               return (
-                <MotionItem key={s.title} variant="softScale">
+                <MotionItem key={s.title} variant="softScale" delay={i * 0.1}>
                   <Link to="/services" className="group block h-full">
                     <motion.div
                       whileHover={{ y: -10 }}
@@ -280,7 +280,7 @@ function Home() {
               const Icon = whyIcons[i];
               const isZap = i === 0;
               return (
-                <MotionItem key={w.title} variant="softScale">
+                <MotionItem key={w.title} variant="softScale" delay={i * 0.1}>
                   <TiltCard>
                     <Card className="glow-border-card h-full border-border/60 bg-card p-6 hover:border-primary/40">
                       {/* Animated icon entrance */}

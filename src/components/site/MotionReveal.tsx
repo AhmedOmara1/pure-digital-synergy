@@ -145,22 +145,31 @@ export function MotionItem({
   className,
   variant = "up",
   duration = 0.6,
+  delay = 0,
+  once = false,
 }: {
   children: ReactNode;
   className?: string;
   variant?: Variant;
   duration?: number;
+  delay?: number;
+  once?: boolean;
 }) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
       className={className}
+      initial={reduce ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once, amount: 0.3, margin: "0px 0px -80px 0px" }}
       variants={buildVariants(variant)}
-      transition={{ duration, ease: premiumEase }}
+      transition={{ duration, delay, ease: premiumEase }}
     >
       {children}
     </motion.div>
   );
 }
+
 
 export function HeroKicker({ children, className }: { children: ReactNode; className?: string }) {
   return (
