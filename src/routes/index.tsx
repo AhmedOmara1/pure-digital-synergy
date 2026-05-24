@@ -237,7 +237,7 @@ function Home() {
             {serviceShort.map((s, i) => {
               const Icon = serviceIcons[i];
               return (
-                <MotionItem key={s.title} variant="softScale">
+                <MotionItem key={s.title} variant="softScale" delay={i * 0.1}>
                   <Link to="/services" className="group block h-full">
                     <motion.div
                       whileHover={{ y: -10 }}
