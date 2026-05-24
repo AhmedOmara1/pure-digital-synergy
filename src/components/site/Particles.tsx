@@ -103,9 +103,9 @@ export function Particles({
               const r = parts[0];
               const g = parts[1];
               const b2 = parts[2];
-              return `rgba(${r}, ${g}, ${b2}, ${alpha * 0.35})`;
+              return `rgba(${r}, ${g}, ${b2}, ${alpha * 0.6})`;
             });
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
