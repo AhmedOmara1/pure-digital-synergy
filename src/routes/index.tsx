@@ -228,7 +228,9 @@ function Home() {
       </section>
 
       {/* ── Marquee strip ────────────────────────────────── */}
-      <MarqueeBar />
+      <MotionReveal variant="slideRight" once={false} duration={0.8}>
+        <MarqueeBar />
+      </MotionReveal>
 
       {/* ── Services strip ───────────────────────────────── */}
       <section className="border-y border-border/50 bg-card/30 py-16 sm:py-20">
