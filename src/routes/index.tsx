@@ -26,6 +26,7 @@ import {
 } from "@/components/site/MotionReveal";
 import { AnimatedCounter } from "@/components/site/AnimatedCounter";
 import { cn } from "@/lib/utils";
+import { MarqueeBar } from "@/components/site/MarqueeBar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -225,6 +226,9 @@ function Home() {
           })()}
         </div>
       </section>
+
+      {/* ── Marquee strip ────────────────────────────────── */}
+      <MarqueeBar />
 
       {/* ── Services strip ───────────────────────────────── */}
       <section className="border-y border-border/50 bg-card/30 py-16 sm:py-20">
