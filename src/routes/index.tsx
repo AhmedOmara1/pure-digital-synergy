@@ -152,7 +152,7 @@ function Home() {
               }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <SplitTextReveal text={t.home.heroTitle} className="animate-shimmer" />
+              <SplitTextReveal text={t.home.heroTitle} className="gradient-text" />
             </motion.h1>
 
             <motion.p
