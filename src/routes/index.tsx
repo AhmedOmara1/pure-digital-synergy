@@ -115,7 +115,7 @@ function Home() {
           style={{ x: heroY, y: heroX }}
         />
         <motion.div aria-hidden className="aurora-blob aurora-blob-3" style={{ x: heroX }} />
-        <Particles color="rgba(140, 170, 255, 0.85)" />
+        <Particles color="rgba(79, 70, 229, 0.55)" density={0.00018} linkDistance={140} />
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <motion.div
             className="mx-auto max-w-4xl text-center"
@@ -152,7 +152,7 @@ function Home() {
               }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <SplitTextReveal text={t.home.heroTitle} className="animate-shimmer" />
+              <SplitTextReveal text={t.home.heroTitle} className="gradient-text" />
             </motion.h1>
 
             <motion.p
@@ -202,16 +202,10 @@ function Home() {
 
           {/* Stats — alternating directional entrance + count-up + glow border */}
           {(() => {
-            const dirs: Array<"slideRight" | "slideDown" | "slideLeft" | "slideUp"> = [
-              "slideRight",
-              "slideDown",
-              "slideLeft",
-              "slideUp",
-            ];
             return (
               <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
                 {t.home.stats.map((s, i) => (
-                  <MotionReveal key={s.label} variant={dirs[i]} delay={i * 0.08} once={false}>
+                  <MotionReveal key={s.label} variant="softScale" delay={i * 0.08} once={false}>
                     <motion.div
                       whileHover={{ y: -8, scale: 1.05 }}
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
@@ -243,14 +237,11 @@ function Home() {
             {serviceShort.map((s, i) => {
               const Icon = serviceIcons[i];
               return (
-                <MotionItem key={s.title} variant="up">
+                <MotionItem key={s.title} variant="softScale">
                   <Link to="/services" className="group block h-full">
                     <motion.div
-                      whileHover={{ y: -10, rotateZ: 0.5 }}
-                      initial={{ rotateZ: -1.5, opacity: 0, y: 20 }}
-                      whileInView={{ rotateZ: 0, opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 300, damping: 22, delay: i * 0.05 }}
+                      whileHover={{ y: -10 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 22 }}
                       className="h-full"
                     >
                       <Card className="glow-border-card flex h-full flex-col items-center border-border/60 bg-card p-6 text-center transition-all duration-300 hover:border-primary/50 hover:glow-shadow">
@@ -287,10 +278,9 @@ function Home() {
           <MotionStagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1} once={false}>
             {t.home.why.map((w, i) => {
               const Icon = whyIcons[i];
-              const isZap = i === 0; // "Fast Delivery / تنفيذ سريع"
-              const slideDirs = ["slideRight", "slideDown", "slideLeft", "slideUp"] as const;
+              const isZap = i === 0;
               return (
-                <MotionItem key={w.title} variant={slideDirs[i]}>
+                <MotionItem key={w.title} variant="softScale">
                   <TiltCard>
                     <Card className="glow-border-card h-full border-border/60 bg-card p-6 hover:border-primary/40">
                       {/* Animated icon entrance */}

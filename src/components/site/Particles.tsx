@@ -47,10 +47,10 @@ export function Particles({
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const mobileScale = width < 640 ? 0.45 : 1;
+      const mobileScale = width < 640 ? 0.75 : 1;
       const count = Math.max(
-        18,
-        Math.min(width < 640 ? 56 : 120, Math.floor(width * height * density * mobileScale)),
+        28,
+        Math.min(width < 640 ? 70 : 130, Math.floor(width * height * density * mobileScale)),
       );
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
@@ -103,9 +103,9 @@ export function Particles({
               const r = parts[0];
               const g = parts[1];
               const b2 = parts[2];
-              return `rgba(${r}, ${g}, ${b2}, ${alpha * 0.35})`;
+              return `rgba(${r}, ${g}, ${b2}, ${alpha * 0.6})`;
             });
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
