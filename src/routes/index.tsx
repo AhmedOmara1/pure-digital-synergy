@@ -278,10 +278,9 @@ function Home() {
           <MotionStagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1} once={false}>
             {t.home.why.map((w, i) => {
               const Icon = whyIcons[i];
-              const isZap = i === 0; // "Fast Delivery / تنفيذ سريع"
-              const slideDirs = ["slideRight", "slideDown", "slideLeft", "slideUp"] as const;
+              const isZap = i === 0;
               return (
-                <MotionItem key={w.title} variant={slideDirs[i]}>
+                <MotionItem key={w.title} variant="softScale">
                   <TiltCard>
                     <Card className="glow-border-card h-full border-border/60 bg-card p-6 hover:border-primary/40">
                       {/* Animated icon entrance */}
