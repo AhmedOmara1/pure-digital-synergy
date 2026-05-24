@@ -115,7 +115,7 @@ function Home() {
           style={{ x: heroY, y: heroX }}
         />
         <motion.div aria-hidden className="aurora-blob aurora-blob-3" style={{ x: heroX }} />
-        <Particles color="rgba(140, 170, 255, 0.85)" />
+        <Particles color="rgba(79, 70, 229, 0.55)" density={0.00018} linkDistance={140} />
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <motion.div
             className="mx-auto max-w-4xl text-center"
