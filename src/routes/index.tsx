@@ -26,6 +26,7 @@ import {
 } from "@/components/site/MotionReveal";
 import { AnimatedCounter } from "@/components/site/AnimatedCounter";
 import { cn } from "@/lib/utils";
+import { MarqueeBar } from "@/components/site/MarqueeBar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
