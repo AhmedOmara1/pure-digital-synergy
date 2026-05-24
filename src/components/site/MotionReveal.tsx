@@ -100,7 +100,7 @@ export function MotionReveal({
       className={className}
       initial={reduce ? "show" : "hidden"}
       whileInView="show"
-      viewport={{ once, amount: 0.2 }}
+      viewport={{ once, amount: 0.15, margin: "0px 0px 120px 0px" }}
       transition={{ duration, delay, ease: premiumEase }}
       variants={buildVariants(variant)}
       style={{ willChange: reduce ? undefined : "transform, opacity" }}
