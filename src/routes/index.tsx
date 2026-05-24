@@ -237,14 +237,11 @@ function Home() {
             {serviceShort.map((s, i) => {
               const Icon = serviceIcons[i];
               return (
-                <MotionItem key={s.title} variant="up">
+                <MotionItem key={s.title} variant="softScale">
                   <Link to="/services" className="group block h-full">
                     <motion.div
-                      whileHover={{ y: -10, rotateZ: 0.5 }}
-                      initial={{ rotateZ: -1.5, opacity: 0, y: 20 }}
-                      whileInView={{ rotateZ: 0, opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 300, damping: 22, delay: i * 0.05 }}
+                      whileHover={{ y: -10 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 22 }}
                       className="h-full"
                     >
                       <Card className="glow-border-card flex h-full flex-col items-center border-border/60 bg-card p-6 text-center transition-all duration-300 hover:border-primary/50 hover:glow-shadow">
