@@ -227,6 +227,9 @@ function Home() {
         </div>
       </section>
 
+      {/* ── Marquee strip ────────────────────────────────── */}
+      <MarqueeBar />
+
       {/* ── Services strip ───────────────────────────────── */}
       <section className="border-y border-border/50 bg-card/30 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
