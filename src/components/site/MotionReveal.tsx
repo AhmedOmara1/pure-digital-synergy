@@ -161,7 +161,7 @@ export function MotionItem({
       className={className}
       initial={reduce ? "show" : "hidden"}
       whileInView="show"
-      viewport={{ once, amount: 0.3, margin: "0px 0px -80px 0px" }}
+      viewport={{ once, amount: 0.15, margin: "0px 0px 120px 0px" }}
       variants={buildVariants(variant)}
       transition={{ duration, delay, ease: premiumEase }}
     >
