@@ -12,6 +12,7 @@ interface ParticlesProps {
 /**
  * Interactive canvas particle field with linking lines, pointer repulsion,
  * click-burst rings, and drag trails. Respects prefers-reduced-motion.
+ * Pauses when off-screen and downgrades aggressively on small screens.
  */
 export function Particles({
   className,
@@ -33,16 +34,27 @@ export function Particles({
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
+    const isMobile = window.innerWidth < 640;
+    // On mobile/touch: disable pointer interaction entirely to avoid scroll jank.
+    const isTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(hover: none)").matches;
+    const allowInteraction = interactive && !isTouch;
+
     let width = 0;
     let height = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
     let raf = 0;
+    let visible = true;
+    let canvasRect = { left: 0, top: 0 };
     const pointer = { x: -9999, y: -9999, active: false, down: false };
 
     type P = { x: number; y: number; vx: number; vy: number; r: number; baseR: number };
     type Ring = { x: number; y: number; r: number; max: number; alpha: number };
     let particles: P[] = [];
     const rings: Ring[] = [];
+
+    const effectiveLinkDistance = isMobile ? Math.min(linkDistance, 90) : linkDistance;
 
     // parse base color to rgb tuple
     const baseRgb = (() => {
@@ -53,25 +65,34 @@ export function Particles({
     })();
     const rgba = (a: number) => `rgba(${baseRgb.r}, ${baseRgb.g}, ${baseRgb.b}, ${a})`;
 
+    const updateRect = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvasRect.left = rect.left;
+      canvasRect.top = rect.top;
+    };
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
+      canvasRect.left = rect.left;
+      canvasRect.top = rect.top;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const mobileScale = width < 640 ? 0.75 : 1;
+      const mobileScale = isMobile ? 0.45 : 1;
+      const cap = isMobile ? 38 : 130;
       const count = Math.max(
-        28,
-        Math.min(width < 640 ? 70 : 130, Math.floor(width * height * density * mobileScale)),
+        isMobile ? 16 : 28,
+        Math.min(cap, Math.floor(width * height * density * mobileScale)),
       );
       particles = Array.from({ length: count }, () => {
         const r = Math.random() * 1.8 + 0.6;
         return {
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * speed * mobileScale,
-          vy: (Math.random() - 0.5) * speed * mobileScale,
+          vx: (Math.random() - 0.5) * speed,
+          vy: (Math.random() - 0.5) * speed,
           r,
           baseR: r,
         };
@@ -80,7 +101,6 @@ export function Particles({
 
     const spawnRing = (x: number, y: number, strong = false) => {
       rings.push({ x, y, r: 4, max: strong ? 180 : 110, alpha: strong ? 0.9 : 0.6 });
-      // burst impulse on nearby particles
       const radius = strong ? 220 : 140;
       const power = strong ? 7 : 3.5;
       for (const p of particles) {
@@ -106,7 +126,6 @@ export function Particles({
           const range = pointer.down ? 200 : 130;
           if (d2 < range * range && d2 > 0.01) {
             const dist = Math.sqrt(d2);
-            // repel when down, gentle attract when hovering
             const f = (1 - dist / range) * (pointer.down ? 0.9 : -0.05);
             p.vx += (dx / dist) * f;
             p.vy += (dy / dist) * f;
@@ -117,7 +136,6 @@ export function Particles({
         } else {
           p.r += (p.baseR - p.r) * 0.08;
         }
-        // clamp speed
         const sp = Math.hypot(p.vx, p.vy);
         if (sp > maxSpeed) {
           p.vx = (p.vx / sp) * maxSpeed;
@@ -144,9 +162,10 @@ export function Particles({
           const b = particles[j];
           const dx = a.x - b.x;
           const dy = a.y - b.y;
+          if (Math.abs(dx) > effectiveLinkDistance || Math.abs(dy) > effectiveLinkDistance) continue;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < linkDistance) {
-            const alpha = (1 - dist / linkDistance) * 0.6;
+          if (dist < effectiveLinkDistance) {
+            const alpha = (1 - dist / effectiveLinkDistance) * 0.6;
             ctx.strokeStyle = rgba(alpha);
             ctx.lineWidth = 0.8;
             ctx.beginPath();
@@ -171,13 +190,11 @@ export function Particles({
       raf = requestAnimationFrame(step);
     };
 
-    const localPoint = (clientX: number, clientY: number) => {
-      const rect = canvas.getBoundingClientRect();
-      return { x: clientX - rect.left, y: clientY - rect.top };
-    };
-
     const onMove = (e: PointerEvent) => {
-      const { x, y } = localPoint(e.clientX, e.clientY);
+      // ignore touch-derived pointer events; they conflict with scrolling
+      if (e.pointerType !== "mouse") return;
+      const x = e.clientX - canvasRect.left;
+      const y = e.clientY - canvasRect.top;
       if (x < 0 || y < 0 || x > width || y > height) {
         pointer.active = false;
         return;
@@ -192,7 +209,9 @@ export function Particles({
       pointer.down = false;
     };
     const onDown = (e: PointerEvent) => {
-      const { x, y } = localPoint(e.clientX, e.clientY);
+      if (e.pointerType !== "mouse") return;
+      const x = e.clientX - canvasRect.left;
+      const y = e.clientY - canvasRect.top;
       if (x < 0 || y < 0 || x > width || y > height) return;
       pointer.down = true;
       pointer.x = x;
@@ -202,27 +221,58 @@ export function Particles({
     const onUp = () => {
       pointer.down = false;
     };
+    const onScroll = () => updateRect();
 
     resize();
-    if (!reduced) raf = requestAnimationFrame(step);
-    else step();
+    const startLoop = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(step);
+    };
+    const stopLoop = () => {
+      if (!raf) return;
+      cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    if (!reduced && visible) startLoop();
+    else if (reduced) step();
+
+    // Pause when off-screen — biggest scroll perf win
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visible = entry.isIntersecting;
+          if (reduced) continue;
+          if (visible) startLoop();
+          else stopLoop();
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(canvas);
 
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
-    window.addEventListener("pointermove", onMove);
-    window.addEventListener("pointerleave", onLeave);
-    if (interactive) {
+
+    if (allowInteraction) {
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointerleave", onLeave, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
       canvas.addEventListener("pointerdown", onDown);
-      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointerup", onUp, { passive: true });
     }
 
     return () => {
-      cancelAnimationFrame(raf);
+      stopLoop();
+      io.disconnect();
       ro.disconnect();
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerleave", onLeave);
-      canvas.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointerup", onUp);
+      if (allowInteraction) {
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerleave", onLeave);
+        window.removeEventListener("scroll", onScroll);
+        canvas.removeEventListener("pointerdown", onDown);
+        window.removeEventListener("pointerup", onUp);
+      }
     };
   }, [color, density, linkDistance, speed, interactive]);
 
@@ -231,8 +281,8 @@ export function Particles({
       ref={canvasRef}
       aria-hidden
       className={
-        (interactive ? "pointer-events-auto cursor-crosshair " : "pointer-events-none ") +
-        "absolute inset-0 h-full w-full " +
+        "pointer-events-none absolute inset-0 h-full w-full md:pointer-events-auto " +
+        (interactive ? "md:cursor-crosshair " : "") +
         (className ?? "")
       }
     />

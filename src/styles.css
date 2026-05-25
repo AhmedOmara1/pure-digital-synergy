@@ -542,6 +542,21 @@
   }
 }
 
+/* Mobile: lighten heavy compositing (blurred aurora blobs) to keep scrolling smooth */
+@media (max-width: 640px) {
+  .hero-aurora > .aurora-blob {
+    filter: blur(50px);
+    opacity: 0.4;
+  }
+  .aurora-blob-3 {
+    display: none;
+  }
+  .ambient-light {
+    filter: blur(60px) !important;
+    animation: none !important;
+  }
+}
+
 /* =============================================
    NEW ANIMATION KEYFRAMES
    ============================================= */
