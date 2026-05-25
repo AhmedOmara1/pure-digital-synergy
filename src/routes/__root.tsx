@@ -143,7 +143,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var d=document.documentElement;var t=localStorage.getItem('theme');var l=localStorage.getItem('lang');if(t==='dark'){d.classList.add('dark');}else{d.classList.remove('dark');}if(l==='ar'){d.lang='ar';d.dir='rtl';}else{d.lang='en';d.dir='ltr';}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=document.documentElement;if(t==='dark'){d.classList.add('dark');}else{d.classList.remove('dark');}}catch(e){}})();`,
           }}
         />
       </head>

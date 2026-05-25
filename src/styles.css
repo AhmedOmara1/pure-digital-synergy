@@ -774,14 +774,13 @@
 }
 
 .marquee-track {
-  animation: marquee-scroll 20s linear infinite;
-  animation-delay: -2.5s;
+  animation: marquee-scroll 22s linear infinite;
+  animation-delay: 0s;
   will-change: transform;
 }
 
 [dir="rtl"] .marquee-track {
-  animation: marquee-scroll-rtl 16s linear infinite;
-  animation-delay: -3s;
+  animation: marquee-scroll-rtl 22s linear infinite;
 }
 
 .marquee-bar:hover .marquee-track {
